@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http\Requests\Unit\Unit;
+
+use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateRequest extends FormRequest
+{
+    /**
+     * Determine if the Unit is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Rule::unique('users')->ignore($this->route('user'))
+     */
+
+   
+    public function rules(): array
+    {
+        return [
+            'total_unit_personnel' => 'required',
+            'present_personnel' => 'required',
+            'leadership_duty' => 'required',
+            'absent_personnel' => 'required',
+            'training_absence' => 'required',
+            'leave_absence' => 'required',
+            'compensatory_leave' => 'required',
+        ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'id' => $this->route('unit')
+        ]);
+    }
+
+}

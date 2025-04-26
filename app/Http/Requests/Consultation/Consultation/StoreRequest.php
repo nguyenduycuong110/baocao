@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Requests\Consultation\Consultation;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreRequest extends FormRequest
+{
+    /**
+     * Determine if the Consultation is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'declaration' => 'required',
+            'accept_value' => 'required',
+            'reject_value' => 'required',
+        ];
+    }
+}
