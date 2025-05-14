@@ -1,18 +1,18 @@
 <?php  
-namespace App\Services\Impl\Merchandise;
+namespace App\Services\Impl\Violation;
 
 use App\Services\BaseService;
 use Illuminate\Http\Request;
-use App\Services\Interfaces\Merchandise\MerchandiseServiceInterface;
-use App\Repositories\Merchandise\MerchandiseRepository;
+use App\Services\Interfaces\Violation\ViolationServiceInterface;
+use App\Repositories\Violation\ViolationRepository;
 use Illuminate\Support\Carbon;
 
-class MerchandiseService extends BaseService implements MerchandiseServiceInterface{
+class ViolationService extends BaseService implements ViolationServiceInterface{
 
     protected $repository;
 
     public function __construct(
-        MerchandiseRepository $repository
+        ViolationRepository $repository
     )
     {
         $this->repository = $repository;
@@ -27,7 +27,6 @@ class MerchandiseService extends BaseService implements MerchandiseServiceInterf
     private function initializeBasicData(Request $request): self {
         $fillable = $this->repository->getFillable();
         $this->modelData = $request->only($fillable);
-        $this->modelData['cassava'] = convert_price($request->cassava);
         $this->modelData['entry_date'] = Carbon::createFromFormat('d/m/Y', $request->entry_date)->format('Y-m-d');
         return $this;
     }

@@ -39,7 +39,7 @@
                                     type="text"
                                     name="entry_date"
                                     value="{{ old('entry_date', ($model->entry_date ?? null) ? Carbon\Carbon::parse($model->entry_date)->format('d/m/Y') : '') }}"
-                                    class="datepicker"
+                                    class="datepicker text-right"
                                     placeholder=""
                                     autocomplete="off"
                                 >
@@ -58,19 +58,20 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="cassava" 
-                                    value="{{ old('cassava', ($model->cassava) ?? '' ) }}" 
-                                    class="text-right"
+                                    value="{{ old('cassava', (isset($model) ? convert_price($model->cassava, true) : '' )) }}"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_cassava ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_cassava, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_cassava ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_cassava, true) : null }}
                             </td>
                             <td></td>
+                            <input type="hidden" class="user_id" value="{{ $auth->id }}">
                         </tr>
                     </tbody>
                 </table>

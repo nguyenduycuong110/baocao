@@ -26,7 +26,25 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'publish' => 'required|min:1|max:2',
+            'green_channel' => 'required',
+            'yellow_channel' => 'required',
+            'red_channel' => 'required',
+            'void_declaration' => 'required',
+            'green_channel_import' => 'required',
+            'yellow_channel_import' => 'required',
+            'red_channel_import' => 'required',
+            'void_declaration_import' => 'required',
+            'temp_import' => 'required',
+            'reexport' => 'required',
+            'overdue_not_reexported' => 'required',
+            'export_turnover' => 'required',
+            'import_turnover' => 'required',
+            'taxable_export_turnover' => 'required',
+            'taxable_import_turnover' => 'required',
+            'outgoing_transit' => 'required',
+            'incoming_transit' => 'required',
+            'outgoing_transit_turnover' => 'required',
+            'incoming_transit_turnover' => 'required',
         ];
     }
 

@@ -39,7 +39,7 @@
                                     type="text"
                                     name="entry_date"
                                     value="{{ old('entry_date', ($model->entry_date ?? null) ? Carbon\Carbon::parse($model->entry_date)->format('d/m/Y') : '') }}"
-                                    class="datepicker"
+                                    class="datepicker text-right"
                                     placeholder=""
                                     autocomplete="off"
                                 >
@@ -67,15 +67,15 @@
                                 <input 
                                     type="number" 
                                     name="vat_tax" 
-                                    value="{{ old('vat_tax', ($model->vat_tax) ?? '' ) }}" 
+                                    value="{{ old('vat_tax', (isset($model) ? convert_price($model->vat_tax , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_vat_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_vat_tax, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_vat_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_vat_tax, true) : null }}
                             </td>
                             <td>
 
@@ -89,15 +89,15 @@
                                 <input 
                                     type="number" 
                                     name="export_import_tax" 
-                                    value="{{ old('export_import_tax', ($model->export_import_tax) ?? '' ) }}" 
+                                    value="{{ old('export_import_tax', (isset($model) ? convert_price($model->export_import_tax , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_export_import_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_export_import_tax, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_export_import_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_export_import_tax, true) : null }}
                             </td>
                             <td></td>
                         </tr>
@@ -109,15 +109,15 @@
                                 <input 
                                     type="number" 
                                     name="income_tax" 
-                                    value="{{ old('income_tax', ($model->income_tax) ?? '' ) }}" 
+                                    value="{{ old('income_tax', (isset($model) ? convert_price($model->income_tax , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_income_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_income_tax, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_income_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_income_tax, true) : null }}
                             </td>
                             <td></td>
                         </tr>
@@ -129,15 +129,15 @@
                                 <input 
                                     type="number" 
                                     name="personal_income_tax" 
-                                    value="{{ old('personal_income_tax', ($model->personal_income_tax) ?? '' ) }}" 
+                                    value="{{ old('personal_income_tax', (isset($model) ? convert_price($model->personal_income_tax , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_personal_income_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_personal_income_tax, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_personal_income_tax ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_personal_income_tax, true) : null }}
                             </td>
                             <td></td>
                         </tr>
@@ -149,15 +149,15 @@
                                 <input 
                                     type="number" 
                                     name="other_revenue" 
-                                    value="{{ old('other_revenue', ($model->other_revenue) ?? '' ) }}" 
+                                    value="{{ old('other_revenue', (isset($model) ? convert_price($model->other_revenue , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_other_revenue ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_other_revenue, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_other_revenue ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_other_revenue, true) : null }}
                             </td>
                             <td></td>
                         </tr>
@@ -208,15 +208,15 @@
                                 <input 
                                     type="number" 
                                     name="refunded_tax_amount" 
-                                    value="{{ old('refunded_tax_amount', ($model->refunded_tax_amount) ?? '' ) }}" 
+                                    value="{{ old('refunded_tax_amount', (isset($model) ? convert_price($model->refunded_tax_amount , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_refunded_tax_amount ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_refunded_tax_amount, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_refunded_tax_amount ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_refunded_tax_amount, true) : null }}
                             </td>
                             <td>
 
@@ -247,15 +247,15 @@
                                 <input 
                                     type="number" 
                                     name="current_debt" 
-                                    value="{{ old('current_debt', ($model->current_debt) ?? '' ) }}" 
+                                    value="{{ old('current_debt', (isset($model) ? convert_price($model->current_debt , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_current_debt ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_current_debt, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_current_debt ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_current_debt, true) : null }}
                             </td>
                             <td>
 
@@ -269,15 +269,15 @@
                                 <input 
                                     type="number" 
                                     name="overdue_debt" 
-                                    value="{{ old('overdue_debt', ($model->overdue_debt) ?? '' ) }}" 
+                                    value="{{ old('overdue_debt', (isset($model) ? convert_price($model->overdue_debt , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_overdue_debt ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_overdue_debt, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_overdue_debt ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_overdue_debt, true) : null }}
                             </td>
                             <td>
 
@@ -330,15 +330,15 @@
                                 <input 
                                     type="number" 
                                     name="tax_amount" 
-                                    value="{{ old('tax_amount', ($model->tax_amount) ?? '' ) }}" 
+                                    value="{{ old('tax_amount', (isset($model) ? convert_price($model->tax_amount , true) : '' )) }}" 
                                     class="text-right"
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_tax_amount ?? null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_tax_amount, true) : null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_tax_amount ?? null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_tax_amount, true) : null }}
                             </td>
                             <td>
 

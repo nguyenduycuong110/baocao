@@ -17,9 +17,9 @@
                             <th>
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th>Cấp cục</th>
-                            <th>Cấp chi cục</th>
-                            <th>Ngày</th>
+                            <th class="text-right">Cấp cục</th>
+                            <th class="text-right">Cấp chi cục</th>
+                            <th class="text-right">Ngày</th>
                             <th class="text-center">Thao tác</th>
                         </tr>
                     </thead>
@@ -29,13 +29,13 @@
                                 <td>
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->department_level }} cuộc
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->branch_level }} cuộc
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 

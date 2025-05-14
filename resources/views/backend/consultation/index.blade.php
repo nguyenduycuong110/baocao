@@ -17,10 +17,10 @@
                             <th>
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th>Tờ khai</th>
-                            <th>Chấp nhận trị giá khai báo</th>
-                            <th>Bác bỏ trị giá khai báo</th>
-                            <th>Ngày</th>
+                            <th class="text-right">Tờ khai</th>
+                            <th class="text-right">Chấp nhận trị giá khai báo</th>
+                            <th class="text-right">Bác bỏ trị giá khai báo</th>
+                            <th class="text-right">Ngày</th>
                             <th class="text-center">Thao tác</th>
                         </tr>
                     </thead>
@@ -30,16 +30,16 @@
                                 <td>
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->declaration }} tờ
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->accept_value }} tờ
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->reject_value }} tờ
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 

@@ -17,14 +17,14 @@
                             <th class="text-center" rowspan="2" style="vertical-align: middle;">
                                 <input type="checkbox" id="checkAll" class="input-checkbox">
                             </th>
-                            <th>Tổng số quân đơn vị</th>
-                            <th>Có mặt</th>
-                            <th>Trực lãnh đạo</th>
-                            <th>Vắng mặt</th>
-                            <th>Học tập</th>
-                            <th>Nghỉ phép</th>
-                            <th>Nghỉ bù</th>
-                            <th>Ngày</th>
+                            <th class="text-right">Tổng số quân đơn vị</th>
+                            <th class="text-right">Có mặt</th>
+                            <th class="text-right">Trực lãnh đạo</th>
+                            <th class="text-right">Vắng mặt</th>
+                            <th class="text-right">Học tập</th>
+                            <th class="text-right">Nghỉ phép</th>
+                            <th class="text-right">Nghỉ bù</th>
+                            <th class="text-right">Ngày</th>
                             <th class="text-center">Trạng thái</th>
                         </tr>
                     </thead>
@@ -34,28 +34,28 @@
                                 <td class="text-center">
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->total_unit_personnel }} 
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->present_personnel }}
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->leadership_duty }} 
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->absent_personnel }} 
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->training_absence }} 
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->leave_absence }} 
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ $record->compensatory_leave }} 
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 

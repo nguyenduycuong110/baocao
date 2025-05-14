@@ -17,19 +17,19 @@
                             <th class="text-center">
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th>Thuế VAT</th>
-                            <th>Thuế XK</th>
-                            <th>Thuế NK</th>
-                            <th>Thuế TTĐB</th>
-                            <th>Thu khác</th>
-                            <th>Tờ khai (hoàn thuế )</th>
-                            <th>Số thuế đã hoàn</th>
-                            <th>Số nợ trong hạn</th>
-                            <th>Số nợ quá hạn</th>
-                            <th>Tờ khai (thu thuế 24/7)</th>
-                            <th>Số thuế</th>
-                            <th>Doanh nghiệp</th>
-                            <th rowspan="2" style="vertical-align: middle;">Ngày</th>
+                            <th class="text-right">Thuế VAT</th>
+                            <th class="text-right">Thuế XK</th>
+                            <th class="text-right">Thuế NK</th>
+                            <th class="text-right">Thuế TTĐB</th>
+                            <th class="text-right">Thu khác</th>
+                            <th class="text-right">Tờ khai (hoàn thuế )</th>
+                            <th class="text-right">Số thuế đã hoàn</th>
+                            <th class="text-right">Số nợ trong hạn</th>
+                            <th class="text-right">Số nợ quá hạn</th>
+                            <th class="text-right">Tờ khai (thu thuế 24/7)</th>
+                            <th class="text-right">Số thuế</th>
+                            <th class="text-right">Doanh nghiệp</th>
+                            <th class="text-right" rowspan="2" style="vertical-align: middle;">Ngày</th>
                             <th rowspan="2" class="text-center" style="vertical-align: middle;">Thao tác</th>
                         </tr>
                     </thead>
@@ -39,43 +39,43 @@
                                 <td class="text-center">
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->vat_tax }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->vat_tax, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->export_import_tax }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->export_import_tax, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->income_tax }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->income_tax, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->personal_income_tax }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->personal_income_tax, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->other_revenue }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->other_revenue, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->refunded_tax_declaration }} bộ
+                                <td class="text-right">
+                                    {{ convert_price($record->refunded_tax_declaration, true) }} bộ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->refunded_tax_amount }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->refunded_tax_amount, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->current_debt }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->current_debt, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->overdue_debt }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->overdue_debt, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->tax_collection_declaration }} tờ khai
+                                <td class="text-right">
+                                    {{ convert_price($record->tax_collection_declaration, true) }} tờ khai
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->tax_amount }} vnđ
+                                <td class="text-right">
+                                    {{ convert_price($record->tax_amount, true) }} vnđ
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->business }} dn
+                                <td class="text-right">
+                                    {{ convert_price($record->business, true) }} dn
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 

@@ -153,6 +153,7 @@
                 $(this).val('0')
             }
             value = value.replace(/\./gi, "")
+            _this.val(HT.addCommas(value))
             if(isNaN(value)){
                 _this.val('0')
             }

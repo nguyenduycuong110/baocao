@@ -14,6 +14,7 @@ return [
     'digitals' => "Digital",
     'consultations' => "Consultation",
     'others' => "Other",
+    'violations' => "Violation",
     'merchandises' => "Merchandise",
     'units' => "Unit",
 ];

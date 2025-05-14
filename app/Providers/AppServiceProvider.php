@@ -37,6 +37,8 @@ use App\Services\Interfaces\Other\OtherServiceInterface;
 use App\Services\Impl\Other\OtherService;
 use App\Services\Interfaces\Merchandise\MerchandiseServiceInterface;
 use App\Services\Impl\Merchandise\MerchandiseService;
+use App\Services\Interfaces\Violation\ViolationServiceInterface;
+use App\Services\Impl\Violation\ViolationService;
 use App\Services\Interfaces\Unit\UnitServiceInterface;
 use App\Services\Impl\Unit\UnitService;
 
@@ -63,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CheckServiceInterface::class, CheckService::class);
         $this->app->bind(DigitalServiceInterface::class, DigitalService::class);
         $this->app->bind(OtherServiceInterface::class, OtherService::class);
+        $this->app->bind(ViolationServiceInterface::class, ViolationService::class);
         $this->app->bind(MerchandiseServiceInterface::class, MerchandiseService::class);
         $this->app->bind(UnitServiceInterface::class, UnitService::class);
     }

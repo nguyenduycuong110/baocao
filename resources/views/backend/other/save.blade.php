@@ -39,7 +39,7 @@
                                     type="text"
                                     name="entry_date"
                                     value="{{ old('entry_date', ($model->entry_date ?? null) ? Carbon\Carbon::parse($model->entry_date)->format('d/m/Y') : '') }}"
-                                    class="datepicker"
+                                    class="datepicker text-right"
                                     placeholder=""
                                     autocomplete="off"
                                 >
@@ -81,7 +81,7 @@
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_business_info ?? null }}
+                                {{ count($accumulated) && !is_null($accumulated['accumulatedMonth']) ?  $accumulated['accumulatedMonth']->total_business_info : null }}
                             </td>
                             <td>
                                 {{ $accumulated['accumulatedYear']->total_business_info ?? null }}

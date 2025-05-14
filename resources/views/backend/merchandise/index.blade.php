@@ -17,8 +17,8 @@
                             <th>
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th>Sắn lát</th>
-                            <th>Ngày</th>
+                            <th class="text-right">Sắn lát</th>
+                            <th class="text-right">Ngày</th>
                             <th class="text-center">Thao tác</th>
                         </tr>
                     </thead>
@@ -28,10 +28,10 @@
                                 <td>
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
-                                <td class="text-left">
-                                    {{ $record->cassava }} USD
+                                <td class="text-right">
+                                    {{ convert_price($record->cassava, true) }} USD
                                 </td>
-                                <td class="text-left">
+                                <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 

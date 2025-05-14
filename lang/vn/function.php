@@ -154,6 +154,17 @@ $fullMenu = [
             ]
         ],
         [
+            'title' => 'XLVP HC / HS',
+            'icon' => 'fa fa-github',
+            'name' => ['violations'],
+            'items' => [
+                [
+                    'title' => 'XLVP HC / HS',
+                    'route' => 'violations'
+                ],
+            ]
+        ],
+        [
             'title' => 'Khác',
             'icon' => 'fa fa-github',
             'name' => ['others'],

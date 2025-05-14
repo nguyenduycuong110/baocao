@@ -33,10 +33,18 @@
                         @php
                             $total_exit_day = isset($model) ? $model->car_exit + $model->boats_exit : '';
                             $total_entry_day = isset($model) ? $model->car_entry + $model->boats_entry : '';
-                            $total_exit_month = count($accumulated) ? $accumulated['accumulatedMonth']->total_car_exit + $accumulated['accumulatedMonth']->total_boats_exit ?? null;
-                            $total_exit_year = count($accumulated) ? $accumulated['accumulatedYear']->total_car_exit + $accumulated['accumulatedYear']->total_boats_exit ?? null;
-                            $total_entry_month = count($accumulated) ? $accumulated['accumulatedMonth']->total_car_entry + $accumulated['accumulatedMonth']->total_boats_entry ?? null;
-                            $total_entry_year = count($accumulated) ? $accumulated['accumulatedYear']->total_car_entry + $accumulated['accumulatedYear']->total_boats_entry ?? null;
+                            $total_exit_month = count($accumulated) && isset($accumulated['accumulatedMonth']) 
+                                ? ($accumulated['accumulatedMonth']->total_car_exit ?? 0) + ($accumulated['accumulatedMonth']->total_boats_exit ?? 0) 
+                                : 0;
+                            $total_exit_year = count($accumulated) && isset($accumulated['accumulatedYear']) 
+                                ? ($accumulated['accumulatedYear']->total_car_exit ?? 0) + ($accumulated['accumulatedYear']->total_boats_exit ?? 0) 
+                                : 0;
+                            $total_entry_month = count($accumulated) && isset($accumulated['accumulatedMonth']) 
+                                ? ($accumulated['accumulatedMonth']->total_car_entry ?? 0) + ($accumulated['accumulatedMonth']->total_boats_entry ?? 0) 
+                                : 0;
+                            $total_entry_year = count($accumulated) && isset($accumulated['accumulatedYear']) 
+                                ? ($accumulated['accumulatedYear']->total_car_entry ?? 0) + ($accumulated['accumulatedYear']->total_boats_entry ?? 0) 
+                                : 0;
                         @endphp
                         <tr class="green-bg">
                             <td class="center">I</td>
@@ -79,8 +87,8 @@
                                     class="text-right"
                                 >
                             </td>
-                            <td>{{ $accumulated['accumulatedMonth']->total_car_exit }}</td>
-                            <td>{{ $accumulated['accumulatedYear']->total_car_exit }}</td>
+                            <td>{{ $accumulated['accumulatedMonth']->total_car_exit ?? null }}</td>
+                            <td>{{ $accumulated['accumulatedYear']->total_car_exit ?? null }}</td>
                             <td></td>
                         </tr>
                         <tr>
@@ -96,10 +104,10 @@
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_boats_exit }}
+                                {{ $accumulated['accumulatedMonth']->total_boats_exit ?? null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_boats_exit }}
+                                {{ $accumulated['accumulatedYear']->total_boats_exit ?? null }}
                             </td>
                             <td></td>
                         </tr>
@@ -131,10 +139,10 @@
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_car_entry }}
+                                {{ $accumulated['accumulatedMonth']->total_car_entry ?? null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_car_entry }}
+                                {{ $accumulated['accumulatedYear']->total_car_entry ?? null }}
                             </td>
                             <td></td>
                         </tr>
@@ -151,10 +159,10 @@
                                 >
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedMonth']->total_boats_entry }}
+                                {{ $accumulated['accumulatedMonth']->total_boats_entry ?? null }}
                             </td>
                             <td>
-                                {{ $accumulated['accumulatedYear']->total_boats_entry }}
+                                {{ $accumulated['accumulatedYear']->total_boats_entry ?? null }}
                             </td>
                             <td></td>
                         </tr>

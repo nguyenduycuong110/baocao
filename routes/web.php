@@ -16,6 +16,7 @@ use App\Http\Controllers\Web\Consultation\ConsultationController;
 use App\Http\Controllers\Web\Check\CheckController;
 use App\Http\Controllers\Web\Digital\DigitalController;
 use App\Http\Controllers\Web\Other\OtherController;
+use App\Http\Controllers\Web\Violation\ViolationController;
 use App\Http\Controllers\Web\Merchandise\MerchandiseController;
 use App\Http\Controllers\Web\Unit\UnitController;
 use App\Http\Controllers\Web\Ajax\DashboardController as AjaxDashboardController;
@@ -74,6 +75,9 @@ Route::middleware(['auth'])->group(function(){
 
         Route::get('others/{id}/delete', [OtherController::class, 'delete'])->name('others.delete');
         Route::resource('others', OtherController::class);
+
+        Route::get('violations/{id}/delete', [ViolationController::class, 'delete'])->name('violations.delete');
+        Route::resource('violations', ViolationController::class);
 
         Route::get('merchandises/{id}/delete', [MerchandiseController::class, 'delete'])->name('merchandises.delete');
         Route::resource('merchandises', MerchandiseController::class);
