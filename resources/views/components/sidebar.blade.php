@@ -27,22 +27,22 @@
                 </div>
             </li>
             @foreach(__('function.module') as $key => $val)
-            <li class=" {{ (isset($val['class'])) ? $val['class'] : '' }} {{ (in_array($segment, $val['name'])) ? 'active' : '' }}">
-                <a href="{{ (isset($val['route'])) ? $val['route'] : '' }}">
-                    <i class="{{ $val['icon'] }}"></i> 
-                    <span class="nav-label">{{ $val['title'] }}</span> 
-                    @if(isset($val['items']) && count($val['items']))
-                    <span class="fa arrow"></span>
+                <li class=" {{ (isset($val['class'])) ? $val['class'] : '' }} {{ (in_array($segment, $val['name'])) ? 'active' : '' }}">
+                    <a href="{{ (isset($val['route'])) ? $val['route'] : '' }}">
+                        <i class="{{ $val['icon'] }}"></i> 
+                        <span class="nav-label">{{ $val['title'] }}</span> 
+                        @if(isset($val['items']) && count($val['items']))
+                        <span class="fa arrow"></span>
+                        @endif
+                    </a>
+                    @if(isset($val['items']))
+                        <ul class="nav nav-second-level">
+                            @foreach($val['items'] as $module)
+                            <li><a href="{{ $module['route'] }}">{{ $module['title'] }}</a></li>
+                            @endforeach
+                        </ul>
                     @endif
-                </a>
-                @if(isset($val['items']))
-                    <ul class="nav nav-second-level">
-                        @foreach($val['items'] as $module)
-                        <li><a href="{{ $module['route'] }}">{{ $module['title'] }}</a></li>
-                        @endforeach
-                    </ul>
-                @endif
-            </li>
+                </li>
             @endforeach
         </ul>
     </div>

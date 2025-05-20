@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <table class="board">
                     <thead>
                         <tr>
@@ -63,10 +63,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="green_channel" 
                                     value="{{ old('green_channel', ($model->green_channel) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -83,10 +83,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="yellow_channel" 
                                     value="{{ old('yellow_channel', ($model->yellow_channel) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -103,10 +103,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="red_channel" 
                                     value="{{ old('red_channel', ($model->red_channel) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -123,10 +123,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="void_declaration" 
                                     value="{{ old('void_declaration', ($model->void_declaration) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -153,10 +153,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="green_channel_import" 
                                     value="{{ old('green_channel_import', ($model->green_channel_import) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -173,10 +173,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="yellow_channel_import" 
                                     value="{{ old('yellow_channel_import', ($model->yellow_channel_import) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -193,10 +193,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="red_channel_import" 
                                     value="{{ old('red_channel_import', ($model->red_channel_import) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -213,10 +213,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="void_declaration_import" 
                                     value="{{ old('void_declaration_import', ($model->void_declaration_import) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -243,10 +243,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="temp_import" 
                                     value="{{ old('temp_import', ($model->temp_import) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -263,10 +263,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="reexport" 
                                     value="{{ old('reexport', ($model->reexport) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -283,10 +283,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="overdue_not_reexported" 
                                     value="{{ old('overdue_not_reexported', ($model->overdue_not_reexported) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">{{ $accumulated['accumulatedMonth']->total_overdue_not_reexported }}</td>
@@ -325,10 +325,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="import_turnover" 
                                     value="{{ old('import_turnover', (isset($model) ? convert_price($model->import_turnover , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">{{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_import_turnover, true) : null }}</td>
@@ -350,10 +350,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="taxable_export_turnover" 
                                     value="{{ old('taxable_export_turnover', (isset($model) ? convert_price($model->taxable_export_turnover , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">{{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_taxable_export_turnover, true) : null }}</td>
@@ -366,10 +366,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="taxable_import_turnover" 
                                     value="{{ old('taxable_import_turnover', (isset($model) ? convert_price($model->taxable_import_turnover , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">{{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_taxable_import_turnover, true) : null }}</td>
@@ -403,10 +403,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="outgoing_transit" 
                                     value="{{ old('outgoing_transit', ($model->outgoing_transit) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -423,10 +423,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="incoming_transit" 
                                     value="{{ old('incoming_transit', ($model->incoming_transit) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -453,10 +453,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="outgoing_transit_turnover" 
                                     value="{{ old('outgoing_transit_turnover', (isset($model) ? convert_price($model->outgoing_transit_turnover , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -473,10 +473,10 @@
                             <td class="center"></td>
                             <td class="number">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="incoming_transit_turnover" 
                                     value="{{ old('incoming_transit_turnover', (isset($model) ? convert_price($model->incoming_transit_turnover , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td class="number">
@@ -487,9 +487,19 @@
                             </td>
                             <td class="number"></td>
                         </tr>
-                        <input type="hidden" class="user_id" value="{{ $auth->id }}">
+                        @if($config['method'] == 'create')
+                            <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                        @else
+                            <input type="hidden" name="user_id" value="{{ $model->user_id }}">
+                        @endif
                     </tbody>
                 </table>
+                @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )
+                    <div class="uk-flex uk-flex-middle btn-check">
+                        <input type="checkbox" name="close" id="closeCheckbox">
+                        <label for="closeCheckbox">Phê duyệt</label>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="text-right mb15">

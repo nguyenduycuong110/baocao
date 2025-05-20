@@ -16,6 +16,7 @@ use App\Services\Interfaces\Team\TeamServiceInterface as TeamService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Lang;
+use App\Services\Interfaces\Permission\PermissionServiceInterface as PermissionService;
 
 class UserController extends BaseController{
 
@@ -26,21 +27,23 @@ class UserController extends BaseController{
     protected $userCatalogueService;
     protected $provinceService;
     protected $teamService;
+    protected $permissionService;
 
     public function __construct(
         UserService $service,
         UserCatalogueService $userCatalogueService,
         ProvinceService $provinceService,
         TeamService $teamService,
+        PermissionService $permissionService
     )
     {
         $this->service = $service;
         $this->userCatalogueService = $userCatalogueService;
         $this->provinceService = $provinceService;
         $this->teamService = $teamService;
+        $this->permissionService = $permissionService;
         parent::__construct($service);
     }
-
 
     public function store(StoreRequest $request): RedirectResponse{
         return $this->baseSave($request);
@@ -107,12 +110,12 @@ class UserController extends BaseController{
         }
     }
 
-
     protected function getData(): array{
         return [
             'user_catalogues' => isset($this->userCatalogueService) ? $this->userCatalogueService?->all() : null,
             'provinces' => isset($this->provinceService) ?  $this->provinceService->all() : null,
             'teams' =>  isset($this->teamService) ?  $this->teamService->teamPublish() : null,
+            'permissions' => $this->permissionService?->all()
         ];
     }
 

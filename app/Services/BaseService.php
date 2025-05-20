@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Lang;
 use App\Traits\HasRelation;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 abstract class BaseService implements BaseServiceInterface{
 
@@ -23,7 +25,7 @@ abstract class BaseService implements BaseServiceInterface{
     protected $modelData;
 
     protected $fieldSearchs = ['name','user_id'];
-    protected $simpleFilter = ['publish']; // hook
+    protected $simpleFilter = ['publish', 'user_id']; // hook
     protected $complexFilter = ['id']; // hook
     protected $dateFilter = ['created_at', 'updated_at'];
     protected $sort = ['id', 'asc'];
@@ -32,6 +34,8 @@ abstract class BaseService implements BaseServiceInterface{
 
 
     protected const PERPAGE = 15;
+
+    protected const OFFICER_ID = 5;
 
 
     public function __construct(
@@ -184,5 +188,42 @@ abstract class BaseService implements BaseServiceInterface{
         }
     }
 
+    public function mergeRequest($request){
+        $auth = Auth::user();
+        $level = $auth->user_catalogues->level;
+        if($level == self::OFFICER_ID){
+            $request->merge([
+                'user_id' => $auth->id
+            ]);
+        }else{
+            $request->merge([
+                'relationFilter' => 
+                    [
+                        'users.user_catalogues' =>  [
+                            'level' => ['gte' => $auth->user_catalogues->level]
+                        ],
+                        'users.teams' => [
+                            'id' => ['eq' => $auth->teams->id]
+                        ]
+                    ],
+            ]);
+        }
+        return $request;
+    }
+
+    public function getUser(){
+        $auth = Auth::user();
+        $level = $auth->user_catalogues->level;
+        $team_id = $auth->teams->id;
+        $users = User::where('team_id', $team_id)
+        ->whereHas('user_catalogues', function ($query) use ($level) {
+            $query->where('level', '>' , $level);
+        })
+        ->with(['user_catalogues' => function ($query) use ($level) {
+            $query->where('level', '>' , $level);
+        }])
+        ->get();
+        return $users;
+    }
 
 }

@@ -17,7 +17,7 @@
                             <th class="text-center">
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th class="text-right">Thuế VAT</th>
+                            {{-- <th class="text-right">Thuế VAT</th>
                             <th class="text-right">Thuế XK</th>
                             <th class="text-right">Thuế NK</th>
                             <th class="text-right">Thuế TTĐB</th>
@@ -28,7 +28,9 @@
                             <th class="text-right">Số nợ quá hạn</th>
                             <th class="text-right">Tờ khai (thu thuế 24/7)</th>
                             <th class="text-right">Số thuế</th>
-                            <th class="text-right">Doanh nghiệp</th>
+                            <th class="text-right">Doanh nghiệp</th> --}}
+                            <th class="text-right">Người tạo</th>
+                            <th class="text-right">Đội</th>
                             <th class="text-right" rowspan="2" style="vertical-align: middle;">Ngày</th>
                             <th rowspan="2" class="text-center" style="vertical-align: middle;">Thao tác</th>
                         </tr>
@@ -40,46 +42,22 @@
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
                                 <td class="text-right">
-                                    {{ convert_price($record->vat_tax, true) }} vnđ
+                                    {{ $record->users->name }}
                                 </td>
                                 <td class="text-right">
-                                    {{ convert_price($record->export_import_tax, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->income_tax, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->personal_income_tax, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->other_revenue, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->refunded_tax_declaration, true) }} bộ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->refunded_tax_amount, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->current_debt, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->overdue_debt, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->tax_collection_declaration, true) }} tờ khai
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->tax_amount, true) }} vnđ
-                                </td>
-                                <td class="text-right">
-                                    {{ convert_price($record->business, true) }} dn
+                                    {{ $record->users->teams->name }}
                                 </td>
                                 <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 
-                                    <a href="{{ route("{$config['route']}.edit", $record->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                    <a 
+                                        href="{{ route("{$config['route']}.edit", $record->id) }}" 
+                                        class="btn btn-success" 
+                                        {{ ($record->close == 1) && $record->person_close->user_catalogues->level < $auth->user_catalogues->level ? 'disabled' : '' }}
+                                    >
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

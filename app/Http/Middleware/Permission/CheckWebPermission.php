@@ -57,6 +57,7 @@ class CheckWebPermission
                 flash()->error(Lang::get('message.not_permission'));
                 return redirect()->route($this->baseRedirect);
             }
+            $user->load(['permission_modules']);
             $user->load(['user_catalogues']);
             $user->load(['user_catalogues.permissions']);
             if(!$user->user_catalogues){
@@ -69,6 +70,19 @@ class CheckWebPermission
                     continue;
                 }
                 $permissions = [$val->value];
+                $totalPermissions = array_reduce($permissions, function($carry, $item){
+                    return $carry | $item;
+                }, 0);
+                if(($totalPermissions & $requiredValue) === $requiredValue){
+                    $hasPermission = true;
+                    break;
+                }
+            }
+            foreach($user->permission_modules as $k => $v){
+                if($v->module != $controllerName){
+                    continue;
+                }
+                $permissions = [$v->value];
                 $totalPermissions = array_reduce($permissions, function($carry, $item){
                     return $carry | $item;
                 }, 0);

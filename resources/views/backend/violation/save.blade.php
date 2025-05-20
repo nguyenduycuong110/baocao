@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <table class="board">
                     <thead>
                         <tr>
@@ -56,10 +56,10 @@
                             <td class="centered-text">Vụ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="smuggling_cases" 
                                     value="{{ old('smuggling_cases', ($model->smuggling_cases) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -96,10 +96,10 @@
                             <td class="centered-text">Vụ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="drug_cases" 
                                     value="{{ old('drug_cases', ($model->drug_cases) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -136,10 +136,10 @@
                             <td class="centered-text">Vụ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="ip_cases" 
                                     value="{{ old('ip_cases', ($model->ip_cases) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -176,10 +176,10 @@
                             <td class="centered-text">Vụ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="admin_cases" 
                                     value="{{ old('admin_cases', ($model->admin_cases) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -216,10 +216,10 @@
                             <td class="centered-text">Vụ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="other_cases" 
                                     value="{{ old('other_cases', ($model->other_cases) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -266,9 +266,19 @@
                             <td></td>
                             <td></td>
                         </tr>
-                        <input type="hidden" class="user_id" value="{{ $auth->id }}">
+                        @if($config['method'] == 'create')
+                            <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                        @else
+                            <input type="hidden" name="user_id" value="{{ $model->user_id }}">
+                        @endif
                     </tbody>
                 </table>
+                @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )
+                    <div class="uk-flex uk-flex-middle btn-check">
+                        <input type="checkbox" name="close" id="closeCheckbox">
+                        <label for="closeCheckbox">Phê duyệt</label>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="text-right mb15">

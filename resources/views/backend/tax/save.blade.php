@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <table class="board">
                     <thead>
                         <tr>
@@ -65,10 +65,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="vat_tax" 
                                     value="{{ old('vat_tax', (isset($model) ? convert_price($model->vat_tax , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -87,10 +87,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="export_import_tax" 
                                     value="{{ old('export_import_tax', (isset($model) ? convert_price($model->export_import_tax , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -107,10 +107,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="income_tax" 
                                     value="{{ old('income_tax', (isset($model) ? convert_price($model->income_tax , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -127,10 +127,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="personal_income_tax" 
                                     value="{{ old('personal_income_tax', (isset($model) ? convert_price($model->personal_income_tax , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -147,10 +147,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="other_revenue" 
                                     value="{{ old('other_revenue', (isset($model) ? convert_price($model->other_revenue , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -184,10 +184,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="refunded_tax_declaration" 
                                     value="{{ old('refunded_tax_declaration', ($model->refunded_tax_declaration) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -206,10 +206,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="refunded_tax_amount" 
                                     value="{{ old('refunded_tax_amount', (isset($model) ? convert_price($model->refunded_tax_amount , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -245,10 +245,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="current_debt" 
                                     value="{{ old('current_debt', (isset($model) ? convert_price($model->current_debt , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -267,10 +267,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="overdue_debt" 
                                     value="{{ old('overdue_debt', (isset($model) ? convert_price($model->overdue_debt , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -306,10 +306,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="tax_collection_declaration" 
                                     value="{{ old('tax_collection_declaration', ($model->tax_collection_declaration) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -328,10 +328,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="tax_amount" 
                                     value="{{ old('tax_amount', (isset($model) ? convert_price($model->tax_amount , true) : '' )) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -350,10 +350,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="business" 
                                     value="{{ old('business', ($model->business) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -365,9 +365,20 @@
                             <td>
 
                             </td>
+                            @if($config['method'] == 'create')
+                                <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                            @else
+                                <input type="hidden" name="user_id" value="{{ $model->user_id }}">
+                            @endif
                         </tr>
                     </tbody>
                 </table>
+                @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )
+                    <div class="uk-flex uk-flex-middle btn-check">
+                        <input type="checkbox" name="close" id="closeCheckbox">
+                        <label for="closeCheckbox">Phê duyệt</label>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="text-right mb15">

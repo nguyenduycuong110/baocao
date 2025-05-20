@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <table class="board">
                     <thead>
                         <tr>
@@ -54,10 +54,10 @@
                             <td>Lượt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="admin_guidelines" 
                                     value="{{ old('admin_guidelines', ($model->admin_guidelines) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -74,10 +74,10 @@
                             <td>Luợt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="business_info" 
                                     value="{{ old('business_info', ($model->business_info) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -94,10 +94,10 @@
                             <td>Vụ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="issue_solving" 
                                     value="{{ old('issue_solving', ($model->issue_solving) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -114,10 +114,10 @@
                             <td>Vụ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="regulation_proposal" 
                                     value="{{ old('regulation_proposal', ($model->regulation_proposal) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>

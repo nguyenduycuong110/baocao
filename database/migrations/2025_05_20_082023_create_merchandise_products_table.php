@@ -6,25 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    
     public function up(): void
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('merchandise_products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->tinyInteger('publish')->default(2);
+            $table->integer('value');
+            $table->unsignedBigInteger('merchandise_id')->nullable(); 
+            $table->foreign('merchandise_id')->references('id')->on('merchandises') ->onDelete('set null');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('merchandise_products');
     }
 };

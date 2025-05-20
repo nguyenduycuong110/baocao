@@ -57,6 +57,9 @@
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $team_vices = isset($model) &&  $model->team_vices->isNotEmpty() ? $model->team_vices->pluck('id')->toArray() : [];
+                        @endphp
                         <div class="row mb15">
                             <div class="col-lg-6">
                                 <div class="form-row">
@@ -64,7 +67,7 @@
                                     <select name="manager_id" class="form-control setupSelect2">
                                         <option value="0">Chọn người quản lý</option>
                                         @if(isset($users))
-                                            @foreach($users as $key => $val)
+                                            @foreach($users as $k => $val)
                                                 <option {{ 
                                                     $val->id == old('manager_id', (isset($model->manager_id)) ? $model->manager_id : '') ? 'selected' : '' 
                                                     }}  value="{{ $val->id }}">{{ $val->name }} - {{ $val->user_catalogues->name }}
@@ -73,6 +76,23 @@
                                         @endif
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label class="control-label">Chọn đội phó</label>
+                                    <select multiple name="team_vices[]" class="form-control setupSelect2" id="">
+                                        @if($users->isNotEmpty())
+                                            @foreach($users as $user)
+                                                <option 
+                                                    value="{{ $user->id }}"
+                                                    {{ in_array($user->id, old('team_vices', $team_vices)) ? 'selected' : '' }}
+                                                >{{ $user->name }}</option>
+                                            @endforeach
+                                        @else
+                                            <option disabled>Không có người dùng nào</option>
+                                        @endif
+                                    </select>
+                                </div>  
                             </div>
                         </div>
                     </div>

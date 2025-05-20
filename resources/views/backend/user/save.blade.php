@@ -271,7 +271,34 @@
                 </div>
             </div>
         </div>
-       
+       <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-bordered custom">
+                            @foreach($permissions as $permission)
+                                @if($permission->module == 'user_catalogues' || $permission->module == 'users' || $permission->module == 'permissions' || $permission->module == 'teams') 
+                                    @continue; 
+                                @endif
+                                <tr>
+                                    <td class="lft">
+                                        <a href="" class="uk-flex uk-flex-middle uk-flex-space-between">{{ $permission->title }} <span style="color:red;">({{ $permission->name }})</span> </a>
+                                    </td>
+                                    <td class="check">
+                                        <input 
+                                            type="checkbox" 
+                                            name="permission_modules[]" 
+                                            value="{{ $permission->id }}" class="form-control"
+                                            {{ (isset($model) && collect($model->permission_modules)->contains('id', $permission->id)) || in_array($permission->id, old('permission_modules', [])) ? 'checked' : '' }}
+                                        >
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="text-right mb15">
             <button class="btn btn-primary" type="submit" name="send" value="send">Lưu lại</button>
         </div>

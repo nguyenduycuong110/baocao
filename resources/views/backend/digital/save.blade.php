@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <table class="board">
                     <thead>
                         <tr>
@@ -62,10 +62,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="department_level" 
                                     value="{{ old('department_level', ($model->department_level) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -82,10 +82,10 @@
                             <td></td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="branch_level" 
                                     value="{{ old('branch_level', ($model->branch_level) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -95,10 +95,20 @@
                                 {{ $accumulated['accumulatedYear']->total_branch_level ?? null }}
                             </td>
                             <td></td>
-                            <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                            @if($config['method'] == 'create')
+                                <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                            @else
+                                <input type="hidden" name="user_id" value="{{ $model->user_id }}">
+                            @endif
                         </tr>
                     </tbody>
                 </table>
+                @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )
+                    <div class="uk-flex uk-flex-middle btn-check">
+                        <input type="checkbox" name="close" id="closeCheckbox">
+                        <label for="closeCheckbox">Phê duyệt</label>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="text-right mb15">

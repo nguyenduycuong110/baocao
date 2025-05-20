@@ -17,10 +17,12 @@
                             <th>
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th class="text-right">Hướng dẫn TTHC</th>
+                            {{-- <th class="text-right">Hướng dẫn TTHC</th>
                             <th class="text-right">Cung cấp thông tin DN/HH</th>
                             <th class="text-right">Giải quyết vướng mắc</th>
-                            <th class="text-right">Kiến nghị QDHC HS</th>
+                            <th class="text-right">Kiến nghị QDHC HS</th> --}}
+                            <th class="text-right">Người tạo</th>
+                            <th class="text-right">Đội</th>
                             <th class="text-right">Ngày</th>
                             <th class="text-center">Thao tác</th>
                         </tr>
@@ -31,7 +33,7 @@
                                 <td>
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
-                                <td class="text-right">
+                                {{-- <td class="text-right">
                                     {{ $record->admin_guidelines }} lượt
                                 </td>
                                 <td class="text-right">
@@ -42,6 +44,12 @@
                                 </td>
                                 <td class="text-right">
                                     {{ $record->regulation_proposal }} vụ
+                                </td> --}}
+                                <td class="text-right">
+                                    {{ $record->users->name }}
+                                </td>
+                                <td class="text-right">
+                                    {{ $record->users->teams->name }}
                                 </td>
                                 <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}

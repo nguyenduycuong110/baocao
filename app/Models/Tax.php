@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasQuery;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Tax extends Model
 {
@@ -28,11 +28,19 @@ class Tax extends Model
         'entry_date',
         'user_id',
         'publish',
+        'close',
+        'person_close_id',
     ];
 
+    protected $with = ['users', 'person_close'];
 
-    public function getRelations(): array {
-        return [];
+    public function users(): BelongsTo{
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function person_close(): BelongsTo{
+        return $this->belongsTo(User::class, 'person_close_id', 'id');
+    }
+
 
 }

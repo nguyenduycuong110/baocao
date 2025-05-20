@@ -10,16 +10,24 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class BaseController extends Controller{
 
     protected $baseRedirect = 'dashboard.index';
+
     protected $route;
+
     protected $namespace;
+
     protected $nestedset;
+
     protected $fields = [];
     
     private $service;
+
+    public const officer_id = 5;
 
     use Loggable;
 
@@ -49,6 +57,7 @@ class BaseController extends Controller{
             return $this->handleWebLogException($th);
         }
     }
+
 
     public function baseSave(Request $request, ?int $id = null): RedirectResponse{
         try {

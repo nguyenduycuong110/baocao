@@ -6,11 +6,15 @@ use App\Http\Requests\Unit\Unit\StoreRequest;
 use App\Http\Requests\Unit\Unit\UpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Services\Interfaces\Unit\UnitServiceInterface as UnitService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 
 class UnitController extends BaseController{
 
     protected $namespace = 'unit';
+    
     protected $route = 'units';
 
     protected $service;
@@ -23,12 +27,34 @@ class UnitController extends BaseController{
         $this->service = $service;
         parent::__construct($service);
     }
+
+    public function index(Request $request): View | RedirectResponse{
+        try {
+            $request = $this->service->mergeRequest($request);
+            $records = $this->service->paginate($request);
+            $auth = Auth::user();
+            $config = $this->config();
+            $config['users'] = $this->service->getUser();
+            $config['model'] = Str::studly(Str::singular($this->route));
+            $data = $this->getData();
+            extract($data);
+            return view("backend.{$this->namespace}.index", compact(
+                'records',
+                'auth',
+                'config',
+                ...array_keys($data)
+            ));
+        } catch (\Throwable $th) {
+            return $this->handleWebLogException($th);
+        }
+    }
+
     public function store(StoreRequest $request): RedirectResponse{
         return $this->baseSave($request);
     }
+
     public function update(UpdateRequest $request, int $id){
         return $this->baseSave($request, $id);
     }
-
 
 }   

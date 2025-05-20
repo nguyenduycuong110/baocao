@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <table class="board">
                     <thead>
                         <tr>
@@ -45,10 +45,10 @@
                             <td class="category-cell">Tổng số quân đơn vị</td>
                             <td class="text-right pr32 text-danger">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="total_unit_personnel" 
                                     value="{{ old('total_unit_personnel', ($model->total_unit_personnel) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                         </tr>
@@ -57,10 +57,10 @@
                             <td class="subcategory-cell">Có mặt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="present_personnel" 
                                     value="{{ old('present_personnel', ($model->present_personnel) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                         </tr>
@@ -69,10 +69,10 @@
                             <td class="subcategory-cell">Trực lãnh đạo</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="leadership_duty" 
                                     value="{{ old('leadership_duty', ($model->leadership_duty) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                         </tr>
@@ -81,10 +81,10 @@
                             <td class="category-cell">Vắng mặt</td>
                             <td class="text-right pr32 text-danger">
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="absent_personnel" 
                                     value="{{ old('absent_personnel', ($model->absent_personnel) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                         </tr>
@@ -93,10 +93,10 @@
                             <td class="subcategory-cell">Học tập</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="training_absence" 
                                     value="{{ old('training_absence', ($model->training_absence) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                         </tr>
@@ -105,10 +105,10 @@
                             <td class="subcategory-cell">Nghỉ phép</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="leave_absence" 
                                     value="{{ old('leave_absence', ($model->leave_absence) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                         </tr>
@@ -117,15 +117,26 @@
                             <td class="subcategory-cell">Nghỉ bù</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="compensatory_leave" 
                                     value="{{ old('compensatory_leave', ($model->compensatory_leave) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                         </tr>
+                        @if($config['method'] == 'create')
+                            <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                        @else
+                            <input type="hidden" name="user_id" value="{{ $model->user_id }}">
+                        @endif
                     </tbody>
                 </table>
+                @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )
+                    <div class="uk-flex uk-flex-middle btn-check">
+                        <input type="checkbox" name="close" id="closeCheckbox">
+                        <label for="closeCheckbox">Phê duyệt</label>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="text-right mb15">

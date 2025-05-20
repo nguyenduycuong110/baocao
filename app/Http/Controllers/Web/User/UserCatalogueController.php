@@ -11,13 +11,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Services\Interfaces\Permission\PermissionServiceInterface as PermissionService;
 
-
 class UserCatalogueController extends BaseController{
 
     protected $namespace = 'user.catalogue';
+
     protected $route = 'user_catalogues';
 
     protected $service;
+
     protected $permissionService;
 
 

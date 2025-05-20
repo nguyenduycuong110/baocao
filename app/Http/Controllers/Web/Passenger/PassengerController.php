@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Services\Interfaces\Passenger\PassengerServiceInterface as PassengerService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class PassengerController extends BaseController{
@@ -25,6 +25,27 @@ class PassengerController extends BaseController{
     {
         $this->service = $service;
         parent::__construct($service);
+    }
+
+    public function index(Request $request): View | RedirectResponse{
+        try {
+            $request = $this->service->mergeRequest($request);
+            $records = $this->service->paginate($request);
+            $auth = Auth::user();
+            $config = $this->config();
+            $config['users'] = $this->service->getUser();
+            $config['model'] = Str::studly(Str::singular($this->route));
+            $data = $this->getData();
+            extract($data);
+            return view("backend.{$this->namespace}.index", compact(
+                'records',
+                'auth',
+                'config',
+                ...array_keys($data)
+            ));
+        } catch (\Throwable $th) {
+            return $this->handleWebLogException($th);
+        }
     }
 
     public function store(StoreRequest $request): RedirectResponse{

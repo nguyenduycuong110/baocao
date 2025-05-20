@@ -1567,6 +1567,7 @@ table{
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    background: #fff;
 }
 .board th, .board td {
     border: 1px solid #ddd;
@@ -1574,11 +1575,11 @@ table{
     text-align: center;
 }
 .board th {
-    background-color: #f2f2f2;
+    background-color: #fff;
     font-weight: bold;
 }
 .board .header-cell {
-    background-color: #f2f2f2;
+    background-color: #fff;
     font-weight: bold;
 }
 .board .category-cell {
@@ -1603,4 +1604,39 @@ table{
 .board .bold-underline {
     font-weight: bold;
     text-decoration: underline;
+}
+.btn-add{
+    display: flex;
+    justify-content: right;
+    margin-bottom: 10px;
+}
+.btn-add button{
+    font-size: 20px;
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: #18a689;
+    color: #fff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-check{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.btn-check label{
+    margin-bottom: 0;
+    font-weight: 500;
+    padding-top: 2px;
+    cursor: pointer;
+}
+.btn-check input{
+    margin-right: 5px;
+    cursor: pointer;
 }

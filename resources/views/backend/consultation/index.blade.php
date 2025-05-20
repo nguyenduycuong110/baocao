@@ -17,9 +17,11 @@
                             <th>
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th class="text-right">Tờ khai</th>
+                            {{-- <th class="text-right">Tờ khai</th>
                             <th class="text-right">Chấp nhận trị giá khai báo</th>
-                            <th class="text-right">Bác bỏ trị giá khai báo</th>
+                            <th class="text-right">Bác bỏ trị giá khai báo</th> --}}
+                            <th class="text-right">Người tạo</th>
+                            <th class="text-right">Đội</th>
                             <th class="text-right">Ngày</th>
                             <th class="text-center">Thao tác</th>
                         </tr>
@@ -31,19 +33,22 @@
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
                                 <td class="text-right">
-                                    {{ $record->declaration }} tờ
+                                    {{ $record->users->name }}
                                 </td>
                                 <td class="text-right">
-                                    {{ $record->accept_value }} tờ
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->reject_value }} tờ
+                                    {{ $record->users->teams->name }}
                                 </td>
                                 <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 
-                                    <a href="{{ route("{$config['route']}.edit", $record->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                    <a 
+                                        href="{{ route("{$config['route']}.edit", $record->id) }}" 
+                                        class="btn btn-success" 
+                                        {{ ($record->close == 1) && $record->person_close->user_catalogues->level < $auth->user_catalogues->level ? 'disabled' : '' }}
+                                    >
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

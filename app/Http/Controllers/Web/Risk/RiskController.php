@@ -8,9 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Services\Interfaces\Risk\RiskServiceInterface as RiskService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-
 
 class RiskController extends BaseController{
 
@@ -29,6 +28,27 @@ class RiskController extends BaseController{
     {
         $this->service = $service;
         parent::__construct($service);
+    }
+
+    public function index(Request $request): View | RedirectResponse{
+        try {
+            $request = $this->service->mergeRequest($request);
+            $records = $this->service->paginate($request);
+            $config = $this->config();
+            $auth = Auth::user();
+            $config['users'] = $this->service->getUser();
+            $config['model'] = Str::studly(Str::singular($this->route));
+            $data = $this->getData();
+            extract($data);
+            return view("backend.{$this->namespace}.index", compact(
+                'records',
+                'auth',
+                'config',
+                ...array_keys($data)
+            ));
+        } catch (\Throwable $th) {
+            return $this->handleWebLogException($th);
+        }
     }
 
     public function store(StoreRequest $request): RedirectResponse{

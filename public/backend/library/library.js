@@ -197,8 +197,6 @@
         })
     }
 
-
-
     HT.addCommas = (nStr) => { 
         nStr = String(nStr);
         nStr = nStr.replace(/\./gi, "");
@@ -221,7 +219,7 @@
             });
         }
     
-        const $colLg6Datepickers = $('.col-lg-6 .datepicker');
+        const $colLg6Datepickers = $('.datepicker');
         if ($colLg6Datepickers.length) {
             const today = new Date();
             const currentDate = today.getDate().toString().padStart(2, '0') + '/' + 
@@ -262,8 +260,45 @@
         });
     };
 
+    HT.rowCount = 2;
+
+    HT.addTr = () => {
+        $(document).on('click', '.btn-add button', function(e){
+            e.preventDefault()
+            let html  = ``
+            html += `
+                <tr>
+                    <td class="center">${HT.rowCount}</td>
+                    <td>
+                        <input 
+                            type="text" 
+                            name="merchandise_products[name][]" 
+                            value=""
+                            class="text-right"
+                        >
+                    </td>
+                    <td></td>
+                    <td>
+                        <input 
+                            type="text" 
+                            name="merchandise_products[value][]" 
+                            value=""
+                            class="text-right int"
+                        >
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            `;
+            $('table tbody').append(html);
+            HT.rowCount++;
+        })
+    }
+
 
 	$(document).ready(function(){
+        HT.addTr()
         HT.triggerDate()
         HT.switchery()
         HT.select2()

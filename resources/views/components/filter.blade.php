@@ -17,16 +17,16 @@
             <div class="action">
                 <div class="uk-flex uk-flex-middle">
                     <div class="uk-search uk-flex uk-flex-middle mr10">
-                        @if(isset($config['filter']))
+                        @if(isset($config['users']))
                             <select name="user_id" class="form-control setupSelect2 ">
-                                <option value="0">Chọn {{ isset($config['userCatalogue']) ? $config['userCatalogue']->name : '' }}</option>
-                                @if(isset($config['usersOnBranch']))
-                                    @foreach($config['usersOnBranch'] as $record)
+                                <option value="0">Chọn thành viên</option>
+                                @if(isset($config['users']))
+                                    @foreach($config['users'] as $user)
                                         <option 
-                                            @if(old('user_id') == $record->id) selected @endif
-                                            value="{{ $record->id }}"
+                                            @if(old('user_id') == $user->id) selected @endif
+                                            value="{{ $user->id }}"
                                         >
-                                            {{ $record->name }}
+                                            {{ $user->name }}
                                         </option>
                                     @endforeach
                                 @endif

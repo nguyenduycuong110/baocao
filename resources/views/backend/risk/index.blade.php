@@ -17,14 +17,16 @@
                             <th class="text-center">
                                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
                             </th>
-                            <th class="text-right">Số lượng TK chuyển luồng</th>
+                            {{-- <th class="text-right">Số lượng TK chuyển luồng</th>
                             <th class="text-right">Dừng hàng qua KVGS</th>
                             <th class="text-right">TK phát hiện vi phạm</th>
                             <th class="text-right">Thu thập <br> thông tin DN</th>
                             <th class="text-right">Đề xuất <br> thiết lập tiêu chí</th>
                             <th class="text-right">Thiết lập <br> tiêu chí phân tích</th>
                             <th class="text-right">Thiết lập hồ sơ <br> mặt hàng trọng điểm</th>
-                            <th class="text-right">Thiết lập hồ sơ <br> DN trọng điểm</th>
+                            <th class="text-right">Thiết lập hồ sơ <br> DN trọng điểm</th> --}}
+                            <th class="text-right">Người tạo</th>
+                            <th class="text-right">Đội</th>
                             <th class="text-right">Ngày</th>
                             <th class="text-center">Thao tác</th>
                         </tr>
@@ -36,34 +38,22 @@
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
                                 <td class="text-right">
-                                    {{ $record->flow_decl }} tờ
+                                    {{ $record->users->name }}
                                 </td>
                                 <td class="text-right">
-                                    {{ $record->stop_via_supervision }} tờ
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->violated_decl }} tờ
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->collect_bus_info }} lượt
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->prop_disb_setup }} lượt
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->act_disb_setup }} lượt
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->item_profile_set }} lượt
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->bus_profile_set }} lượt
+                                    {{ $record->users->teams->name }}
                                 </td>
                                 <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 
-                                    <a href="{{ route("{$config['route']}.edit", $record->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                    <a 
+                                        href="{{ route("{$config['route']}.edit", $record->id) }}" 
+                                        class="btn btn-success" 
+                                        {{ ($record->close == 1) && $record->person_close->user_catalogues->level < $auth->user_catalogues->level ? 'disabled' : '' }}
+                                    >
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

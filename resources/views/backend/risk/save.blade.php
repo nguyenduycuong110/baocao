@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <table class="board">
                     <thead>
                         <tr>
@@ -54,10 +54,10 @@
                             <td>Tờ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="flow_decl" 
                                     value="{{ old('flow_decl', ($model->flow_decl) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -74,10 +74,10 @@
                             <td>Tờ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="stop_via_supervision" 
                                     value="{{ old('stop_via_supervision', ($model->stop_via_supervision) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -94,10 +94,10 @@
                             <td>Tờ</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="violated_decl" 
                                     value="{{ old('violated_decl', ($model->violated_decl) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -114,10 +114,10 @@
                             <td>Lượt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="collect_bus_info" 
                                     value="{{ old('collect_bus_info', ($model->collect_bus_info) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -134,10 +134,10 @@
                             <td>Lượt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="prop_disb_setup" 
                                     value="{{ old('prop_disb_setup', ($model->prop_disb_setup) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -154,10 +154,10 @@
                             <td>Lượt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="act_disb_setup" 
                                     value="{{ old('act_disb_setup', ($model->act_disb_setup) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -174,10 +174,10 @@
                             <td>Lượt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="item_profile_set" 
                                     value="{{ old('item_profile_set', ($model->item_profile_set) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -194,10 +194,10 @@
                             <td>Lượt</td>
                             <td>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     name="bus_profile_set" 
                                     value="{{ old('bus_profile_set', ($model->bus_profile_set) ?? '' ) }}" 
-                                    class="text-right"
+                                    class="text-right int"
                                 >
                             </td>
                             <td>
@@ -208,9 +208,19 @@
                             </td>
                             <td></td>
                         </tr>
-                        <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                        @if($config['method'] == 'create')
+                            <input type="hidden" name="user_id" value="{{ $auth->id }}">
+                        @else
+                            <input type="hidden" name="user_id" value="{{ $model->user_id }}">
+                        @endif
                     </tbody>
                 </table>
+                @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )
+                    <div class="uk-flex uk-flex-middle btn-check">
+                        <input type="checkbox" name="close" id="closeCheckbox">
+                        <label for="closeCheckbox">Phê duyệt</label>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="text-right mb15">

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Traits\HasQuery;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable 
 {
@@ -48,7 +49,7 @@ class User extends Authenticatable
     ];
 
     protected $with = [
-        'user_catalogues',
+        'user_catalogues'
     ];
 
     /**
@@ -72,8 +73,12 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class, 'team_id', 'id');
     }
 
-    public function getRelations(): array {
-        return ['user_catalogues','teams'];
+    public function permission_modules(): BelongsToMany{
+        return $this->belongsToMany(Permission::class, 'user_permission_module', 'user_id', 'permission_id');
     }
 
+    public function getRelations(): array {
+        return ['user_catalogues','teams', 'permission_modules'];
+    }
+    
 }

@@ -17,13 +17,15 @@
                             <th class="text-center" rowspan="2" style="vertical-align: middle;">
                                 <input type="checkbox" id="checkAll" class="input-checkbox">
                             </th>
-                            <th class="text-right">Tổng số quân đơn vị</th>
+                            {{-- <th class="text-right">Tổng số quân đơn vị</th>
                             <th class="text-right">Có mặt</th>
                             <th class="text-right">Trực lãnh đạo</th>
                             <th class="text-right">Vắng mặt</th>
                             <th class="text-right">Học tập</th>
                             <th class="text-right">Nghỉ phép</th>
-                            <th class="text-right">Nghỉ bù</th>
+                            <th class="text-right">Nghỉ bù</th> --}}
+                            <th class="text-right">Người tạo</th>
+                            <th class="text-right">Đội</th>
                             <th class="text-right">Ngày</th>
                             <th class="text-center">Trạng thái</th>
                         </tr>
@@ -35,31 +37,22 @@
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
                                 </td>
                                 <td class="text-right">
-                                    {{ $record->total_unit_personnel }} 
+                                    {{ $record->users->name }}
                                 </td>
                                 <td class="text-right">
-                                    {{ $record->present_personnel }}
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->leadership_duty }} 
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->absent_personnel }} 
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->training_absence }} 
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->leave_absence }} 
-                                </td>
-                                <td class="text-right">
-                                    {{ $record->compensatory_leave }} 
+                                    {{ $record->users->teams->name }}
                                 </td>
                                 <td class="text-right">
                                     {{ convertDateTime($record->entry_date, 'd-m-Y', 'Y-m-d') }}
                                 </td>
                                 <td class="text-center"> 
-                                    <a href="{{ route("{$config['route']}.edit", $record->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                    <a 
+                                        href="{{ route("{$config['route']}.edit", $record->id) }}" 
+                                        class="btn btn-success" 
+                                        {{ ($record->close == 1) && $record->person_close->user_catalogues->level < $auth->user_catalogues->level ? 'disabled' : '' }}
+                                    >
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

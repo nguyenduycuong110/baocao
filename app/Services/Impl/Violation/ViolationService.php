@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\Interfaces\Violation\ViolationServiceInterface;
 use App\Repositories\Violation\ViolationRepository;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ViolationService extends BaseService implements ViolationServiceInterface{
 
@@ -28,6 +29,10 @@ class ViolationService extends BaseService implements ViolationServiceInterface{
         $fillable = $this->repository->getFillable();
         $this->modelData = $request->only($fillable);
         $this->modelData['entry_date'] = Carbon::createFromFormat('d/m/Y', $request->entry_date)->format('Y-m-d');
+        if(isset($request->close)){
+            $this->modelData['close'] = $request->close == 'on' ? 1 : 0;
+            $this->modelData['person_close_id'] = Auth::user()->id;
+        }
         return $this;
     }
    
