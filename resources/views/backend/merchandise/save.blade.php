@@ -123,6 +123,7 @@
                                 </td>
                                 <td></td>
                             </tr>
+                        @endif
                     </tbody>
                 </table>
                 @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )

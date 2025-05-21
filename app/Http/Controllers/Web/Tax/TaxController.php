@@ -9,6 +9,7 @@ use App\Services\Interfaces\Tax\TaxServiceInterface as TaxService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class TaxController extends BaseController{
