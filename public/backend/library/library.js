@@ -289,6 +289,11 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td class="delete">
+                        <button class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
                 </tr>
             `;
             $('table tbody').append(html);
@@ -296,8 +301,16 @@
         })
     }
 
+    HT.deleteTr = () => {
+        $(document).on('click', '.delete button', function(e){
+            e.preventDefault()
+            let _this = $(this)
+            _this.closest('tr').remove()
+        })
+    }
 
 	$(document).ready(function(){
+        HT.deleteTr()
         HT.addTr()
         HT.triggerDate()
         HT.switchery()

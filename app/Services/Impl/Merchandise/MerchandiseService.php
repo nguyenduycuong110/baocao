@@ -53,12 +53,14 @@ class MerchandiseService extends BaseService implements MerchandiseServiceInterf
     }
 
     public function saveModel(?int $id = null): self{
+        $method = $id != null ? 'update' : 'create';
         if($id){
             $this->model = $this->repository->update($id, $this->modelData);
         }else{
             $this->model = $this->repository->create($this->modelData);
         }
         $this->result = $this->model;
+        $this->result['method'] = $method;
         return $this;
     } 
     
@@ -74,6 +76,14 @@ class MerchandiseService extends BaseService implements MerchandiseServiceInterf
                     'value' => convert_price($merchandise_products['value'][$k])
                 ];
             }
+            
+        }
+        if($this->result->method == 'create'){
+            foreach ($payload as $item) {
+                $this->result->merchandise_products()->create($item);
+            }
+        }else{
+            $this->result->merchandise_products()->delete();
             foreach ($payload as $item) {
                 $this->result->merchandise_products()->create($item);
             }

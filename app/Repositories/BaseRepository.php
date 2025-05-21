@@ -70,22 +70,26 @@ class BaseRepository {
         return $this->model->select('*')->get();
     }
     
-    public function accumulatedMonth($fields = [], $month){
+    public function accumulatedMonth($fields = [], $month)
+    {
         return $this->model->selectRaw('MONTH(entry_date) as month, ' . implode(', ', array_map(function($field) {
             return "SUM(`{$field}`) as total_$field";
         }, $fields)))
-        ->whereRaw('MONTH(entry_date) = ?', [$month])
-        ->groupBy('month')
-        ->first();
+            ->whereRaw('MONTH(entry_date) = ?', [$month])
+            ->where('entry_date', '<=', now()->endOfDay()) 
+            ->groupBy('month')
+            ->first();
     }
 
-    public function accumulatedYear($fields = [], $year){
+    public function accumulatedYear($fields = [], $year)
+    {
         return $this->model->selectRaw('YEAR(entry_date) as year, ' . implode(', ', array_map(function($field) {
             return "SUM(`{$field}`) as total_$field";
         }, $fields)))
-        ->whereRaw('YEAR(entry_date) = ?', [$year])
-        ->groupBy('year')
-        ->first();
+            ->whereRaw('YEAR(entry_date) = ?', [$year])
+            ->where('entry_date', '<=', now()->endOfDay()) 
+            ->groupBy('year')
+            ->first();
     }
 
     

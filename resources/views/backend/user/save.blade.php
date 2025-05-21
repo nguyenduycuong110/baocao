@@ -172,7 +172,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-left">Chọn đội <span class="text-danger">(*)</span></label>
                                     <select name="team_id" class="form-control setupSelect2">
-                                        <option value="0">Chọn chức vụ</option>
+                                        <option value="">Chọn chức vụ</option>
                                         @if(isset($teams))
                                             @foreach($teams as $key => $val)
                                                 <option {{ 

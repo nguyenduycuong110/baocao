@@ -16,7 +16,7 @@
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-8">
                 <div class="btn-add">
                     <button>+</button>
                 </div>
@@ -86,6 +86,11 @@
                                         
                                     </td>
                                     <td></td>
+                                    <td class="delete">
+                                        <button class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
                                     @if($config['method'] == 'create')
                                         <input type="hidden" name="user_id" value="{{ $auth->id }}">
                                     @else
