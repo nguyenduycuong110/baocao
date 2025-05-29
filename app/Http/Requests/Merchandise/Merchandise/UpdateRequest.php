@@ -4,6 +4,7 @@ namespace App\Http\Requests\Merchandise\Merchandise;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -26,7 +27,11 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+             'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('merchandise', $this->id)
+            ],
         ];
     }
 

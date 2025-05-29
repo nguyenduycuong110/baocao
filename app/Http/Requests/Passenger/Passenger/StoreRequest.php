@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Passenger\Passenger;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -23,7 +24,11 @@ class StoreRequest extends FormRequest
     {
         return [
             'departure' => 'required',
-            'entry' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('passengers', $this->route('id'))
+            ],
         ];
     }
 }

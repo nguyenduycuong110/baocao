@@ -1,7 +1,8 @@
 <?php  
 namespace App\Repositories;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BaseRepository {
     protected $model;
@@ -72,22 +73,30 @@ class BaseRepository {
     
     public function accumulatedMonth($fields = [], $month)
     {
+        $auth = Auth::user();
+        $userTeamIds = DB::table('users')->where('team_id', $auth->team_id)->get()->pluck('id')->toArray();
+
         return $this->model->selectRaw('MONTH(entry_date) as month, ' . implode(', ', array_map(function($field) {
             return "SUM(`{$field}`) as total_$field";
         }, $fields)))
             ->whereRaw('MONTH(entry_date) = ?', [$month])
             ->where('entry_date', '<=', now()->endOfDay()) 
+            ->whereIn('user_id', $userTeamIds)
             ->groupBy('month')
             ->first();
     }
 
     public function accumulatedYear($fields = [], $year)
     {
+        $auth = Auth::user();
+        $userTeamIds = DB::table('users')->where('team_id', $auth->team_id)->get()->pluck('id')->toArray();
+
         return $this->model->selectRaw('YEAR(entry_date) as year, ' . implode(', ', array_map(function($field) {
             return "SUM(`{$field}`) as total_$field";
         }, $fields)))
             ->whereRaw('YEAR(entry_date) = ?', [$year])
             ->where('entry_date', '<=', now()->endOfDay()) 
+            ->whereIn('user_id', $userTeamIds)
             ->groupBy('year')
             ->first();
     }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Cargo\Cargo;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -45,6 +46,11 @@ class UpdateRequest extends FormRequest
             'incoming_transit' => 'required',
             'outgoing_transit_turnover' => 'required',
             'incoming_transit_turnover' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('cargos', $this->id)
+            ],
         ];
     }
 

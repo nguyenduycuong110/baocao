@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Violation\Violation;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -32,6 +33,11 @@ class StoreRequest extends FormRequest
             'admin_value' => 'required',
             'other_cases' => 'required',
             'other_value' => 'required',
+             'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('violations', $this->route('id'))
+            ],
         ];
     }
 }

@@ -31,11 +31,11 @@
                     <a href="{{ (isset($val['route'])) ? $val['route'] : '' }}">
                         <i class="{{ $val['icon'] }}"></i> 
                         <span class="nav-label">{{ $val['title'] }}</span> 
-                        @if(isset($val['items']) && count($val['items']))
+                        @if(isset($val['items']) && count($val['items']) && !isset($val['route']))
                         <span class="fa arrow"></span>
                         @endif
                     </a>
-                    @if(isset($val['items']))
+                    @if(isset($val['items']) && !isset($val['route']))
                         <ul class="nav nav-second-level">
                             @foreach($val['items'] as $module)
                             <li><a href="{{ $module['route'] }}">{{ $module['title'] }}</a></li>

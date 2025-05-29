@@ -4,6 +4,7 @@ namespace App\Http\Requests\Tax\Tax;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -38,6 +39,11 @@ class UpdateRequest extends FormRequest
             'tax_collection_declaration' => 'required',
             'tax_amount' => 'required',
             'business' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('taxes', $this->id)
+            ],
         ];
     }
 

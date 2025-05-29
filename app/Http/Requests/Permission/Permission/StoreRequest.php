@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Permission\Permission;
 
 use Illuminate\Foundation\Http\FormRequest;
+// use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -26,6 +27,7 @@ class StoreRequest extends FormRequest
             'module' => 'string|required|not_in:none',
             'value' => 'required',
             'title' => 'string',
+            
         ];
     }
     

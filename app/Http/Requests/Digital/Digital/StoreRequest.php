@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Digital\Digital;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -24,6 +25,11 @@ class StoreRequest extends FormRequest
         return [
             'department_level' => 'required',
             'branch_level' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('digitals', $this->route('id'))
+            ],
         ];
     }
 }

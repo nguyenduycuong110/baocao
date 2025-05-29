@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Vehicle\Vehicle;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -26,6 +27,11 @@ class StoreRequest extends FormRequest
             'boats_exit' => 'required',
             'car_entry' => 'required',
             'boats_entry' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('vehicles', $this->route('id'))
+            ],
         ];
     }
 }

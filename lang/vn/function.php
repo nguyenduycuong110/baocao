@@ -108,6 +108,7 @@ $modules = [
             'title' => 'Tình hình đơn vị',
             'icon' => 'fa fa-github',
             'name' => ['units'],
+            'route' => 'units',
             'items' => [
                 [
                     'title' => 'Tình hình đơn vị',
@@ -119,6 +120,7 @@ $modules = [
             'title' => 'PTVT XNC, QC',
             'icon' => 'fa fa-github',
             'name' => ['vehicles'],
+            'route' => 'vehicles',
             'items' => [
                 [
                     'title' => 'PTVT XNC, QC',
@@ -130,6 +132,7 @@ $modules = [
             'title' => 'Hành khách XNC',
             'icon' => 'fa fa-github',
             'name' => ['passengers'],
+            'route' => 'passengers',
             'items' => [
                 [
                     'title' => 'Hành khách XNC',
@@ -141,6 +144,7 @@ $modules = [
             'title' => 'TQ hàng hóa XNK',
             'icon' => 'fa fa-github',
             'name' => ['cargos'],
+            'route' => 'cargos',
             'items' => [
                 [
                     'title' => 'TQ hàng hóa XNK',
@@ -152,6 +156,7 @@ $modules = [
             'title' => 'QL Rủi Ro',
             'icon' => 'fa fa-github',
             'name' => ['risks'],
+            'route' => 'risks',
             'items' => [
                 [
                     'title' => 'QL Rủi Ro',
@@ -163,6 +168,7 @@ $modules = [
             'title' => 'QL Thuế',
             'icon' => 'fa fa-github',
             'name' => ['taxes'],
+            'route' => 'taxes',
             'items' => [
                 [
                     'title' => 'QL Thuế',
@@ -174,6 +180,7 @@ $modules = [
             'title' => 'Tham vấn',
             'icon' => 'fa fa-github',
             'name' => ['consultations'],
+            'route' => 'consultations',
             'items' => [
                 [
                     'title' => 'Tham vấn',
@@ -185,6 +192,7 @@ $modules = [
             'title' => 'Kiểm tra STQ',
             'icon' => 'fa fa-github',
             'name' => ['checks'],
+            'route' => 'checks',
             'items' => [
                 [
                     'title' => 'Kiểm tra STQ',
@@ -196,6 +204,7 @@ $modules = [
             'title' => 'DVCTT',
             'icon' => 'fa fa-github',
             'name' => ['digitals'],
+            'route' => 'digitals',
             'items' => [
                 [
                     'title' => 'DVCTT',
@@ -207,6 +216,7 @@ $modules = [
             'title' => 'XLVP HC / HS',
             'icon' => 'fa fa-github',
             'name' => ['violations'],
+            'route' => 'violations',
             'items' => [
                 [
                     'title' => 'XLVP HC / HS',
@@ -218,6 +228,7 @@ $modules = [
             'title' => 'Khác',
             'icon' => 'fa fa-github',
             'name' => ['others'],
+            'route' => 'others',
             'items' => [
                 [
                     'title' => 'Khác',
@@ -229,6 +240,7 @@ $modules = [
             'title' => 'Mặt hàng XNK',
             'icon' => 'fa fa-github',
             'name' => ['merchandises'],
+            'route' => 'merchandises',
             'items' => [
                 [
                     'title' => 'Mặt hàng XNK',

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Other\Other;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -30,6 +31,11 @@ class UpdateRequest extends FormRequest
             'business_info' => 'required',
             'issue_solving' => 'required',
             'regulation_proposal' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('others', $this->id)
+            ],
         ];
     }
 

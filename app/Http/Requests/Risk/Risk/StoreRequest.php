@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Risk\Risk;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -30,6 +31,11 @@ class StoreRequest extends FormRequest
             'act_disb_setup' => 'required',
             'item_profile_set' => 'required',
             'bus_profile_set' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('risks', $this->route('id'))
+            ],
         ];
     }
 }

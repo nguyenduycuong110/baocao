@@ -4,6 +4,8 @@ namespace App\Http\Requests\Violation\Violation;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
+
 
 class UpdateRequest extends FormRequest
 {
@@ -26,6 +28,11 @@ class UpdateRequest extends FormRequest
             'admin_value' => 'required',
             'other_cases' => 'required',
             'other_value' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('violations', $this->id)
+            ],
         ];
     }
 
