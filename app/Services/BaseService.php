@@ -165,23 +165,50 @@ abstract class BaseService implements BaseServiceInterface{
         }
     }
 
-    public function accumulated($fields = [] , $id = null){
+    public function accumulated($fields = [], $id = null)
+    {
         try {
+
             $accumulated = [];
+
             $accumulatedMonth = 0;
+
             $accumulatedYear = 0;
-            $record = !is_null($id) ? $this->repository->findById($id) : null;
-            $month = !is_null($record) ? Carbon::parse($record->entry_date)->month : now()->month;
-            $year = !is_null($record) ?  Carbon::parse($record->entry_date)->year : now()->year;
-            if(!count($this->repository->all())){
+
+            $userIds = null;
+
+            $auth = Auth::user();
+
+            $isLeader = ($auth->teams->manager_id  == $auth->id) ? true : false;
+
+            if($isLeader == true){
+                $teamId = $auth->teams->id;
+                $userIds = User::where('team_id', $teamId)->get()->pluck('id')->toArray();
+            }
+
+            if (!count($this->repository->all())) {
                 return $accumulated;
             }
-            $accumulatedMonth = $this->repository->accumulatedMonth($fields, $month);
-            $accumulatedYear  = $this->repository->accumulatedYear($fields, $year);
+            
+            if (!is_null($id)) {
+                $record = $this->repository->findById($id);
+                if (!$record) {
+                    return $accumulated; 
+                }
+                $cutoffDate = Carbon::parse($record->entry_date);
+            } else {
+                $cutoffDate = now();
+            }
+
+            $accumulatedMonth = $this->repository->accumulatedMonth($fields, $cutoffDate, $userIds);
+
+            $accumulatedYear = $this->repository->accumulatedYear($fields, $cutoffDate, $userIds);
+            
             $accumulated = [
                 'accumulatedMonth' => $accumulatedMonth,
                 'accumulatedYear' => $accumulatedYear,
             ];
+
             return $accumulated;
         } catch (\Throwable $th) {
             throw $th;

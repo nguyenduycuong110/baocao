@@ -1,6 +1,7 @@
 <?php  
 namespace App\Repositories;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 
 class BaseRepository {
@@ -70,28 +71,47 @@ class BaseRepository {
         return $this->model->select('*')->get();
     }
     
-    public function accumulatedMonth($fields = [], $month)
+    public function getLatestEntryDate()
     {
-        return $this->model->selectRaw('MONTH(entry_date) as month, ' . implode(', ', array_map(function($field) {
+        return $this->model->max('entry_date');
+    }
+
+    public function accumulatedMonth($fields = [], $cutoffDate, $userIds)
+    {
+
+        $temp = [
+            0 => Auth::user()->id
+        ];
+
+        $userIds = ($userIds != null) ? $userIds : $temp;
+         
+        $startOfMonth = $cutoffDate->copy()->startOfMonth();
+        
+        return $this->model->selectRaw(implode(', ', array_map(function($field) {
             return "SUM(`{$field}`) as total_$field";
         }, $fields)))
-            ->whereRaw('MONTH(entry_date) = ?', [$month])
-            ->where('entry_date', '<=', now()->endOfDay()) 
-            ->groupBy('month')
+            ->whereBetween('entry_date', [$startOfMonth, $cutoffDate->endOfDay()])
+            ->whereIn('user_id', $userIds)
             ->first();
     }
 
-    public function accumulatedYear($fields = [], $year)
+    public function accumulatedYear($fields = [], $cutoffDate, $userIds)
     {
-        return $this->model->selectRaw('YEAR(entry_date) as year, ' . implode(', ', array_map(function($field) {
+
+        $temp = [
+            0 => Auth::user()->id
+        ];
+
+        $userIds = ($userIds != null) ? $userIds : $temp;
+
+        $startOfYear = $cutoffDate->copy()->startOfYear();
+        
+        return $this->model->selectRaw(implode(', ', array_map(function($field) {
             return "SUM(`{$field}`) as total_$field";
         }, $fields)))
-            ->whereRaw('YEAR(entry_date) = ?', [$year])
-            ->where('entry_date', '<=', now()->endOfDay()) 
-            ->groupBy('year')
+            ->whereBetween('entry_date', [$startOfYear, $cutoffDate->endOfDay()])
+            ->whereIn('user_id', $userIds)
             ->first();
     }
-
-    
 
 }

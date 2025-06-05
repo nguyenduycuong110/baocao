@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 
 class BaseController extends Controller{

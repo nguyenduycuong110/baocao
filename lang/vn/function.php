@@ -108,133 +108,73 @@ $modules = [
             'title' => 'Tình hình đơn vị',
             'icon' => 'fa fa-github',
             'name' => ['units'],
-            'items' => [
-                [
-                    'title' => 'Tình hình đơn vị',
-                    'route' => 'units'
-                ],
-            ]
+            'route' => 'units'
         ],
         [
             'title' => 'PTVT XNC, QC',
             'icon' => 'fa fa-github',
             'name' => ['vehicles'],
-            'items' => [
-                [
-                    'title' => 'PTVT XNC, QC',
-                    'route' => 'vehicles'
-                ],
-            ]
+            'route' => 'vehicles'
         ],
         [
             'title' => 'Hành khách XNC',
             'icon' => 'fa fa-github',
             'name' => ['passengers'],
-            'items' => [
-                [
-                    'title' => 'Hành khách XNC',
-                    'route' => 'passengers'
-                ],
-            ]
+            'route' => 'passengers'
         ],
         [
             'title' => 'TQ hàng hóa XNK',
             'icon' => 'fa fa-github',
             'name' => ['cargos'],
-            'items' => [
-                [
-                    'title' => 'TQ hàng hóa XNK',
-                    'route' => 'cargos'
-                ],
-            ]
+            'route' => 'cargos'
         ],
         [
             'title' => 'QL Rủi Ro',
             'icon' => 'fa fa-github',
             'name' => ['risks'],
-            'items' => [
-                [
-                    'title' => 'QL Rủi Ro',
-                    'route' => 'risks'
-                ],
-            ]
+            'route' => 'risks'
         ],
         [
             'title' => 'QL Thuế',
             'icon' => 'fa fa-github',
             'name' => ['taxes'],
-            'items' => [
-                [
-                    'title' => 'QL Thuế',
-                    'route' => 'taxes'
-                ],
-            ]
+            'route' => 'taxes'
         ],
         [
             'title' => 'Tham vấn',
             'icon' => 'fa fa-github',
             'name' => ['consultations'],
-            'items' => [
-                [
-                    'title' => 'Tham vấn',
-                    'route' => 'consultations'
-                ],
-            ]
+            'route' => 'consultations'
         ],
         [
             'title' => 'Kiểm tra STQ',
             'icon' => 'fa fa-github',
             'name' => ['checks'],
-            'items' => [
-                [
-                    'title' => 'Kiểm tra STQ',
-                    'route' => 'checks'
-                ],
-            ]
+            'route' => 'checks'
         ],
         [
             'title' => 'DVCTT',
             'icon' => 'fa fa-github',
             'name' => ['digitals'],
-            'items' => [
-                [
-                    'title' => 'DVCTT',
-                    'route' => 'digitals'
-                ],
-            ]
+            'route' => 'digitals'
         ],
         [
             'title' => 'XLVP HC / HS',
             'icon' => 'fa fa-github',
             'name' => ['violations'],
-            'items' => [
-                [
-                    'title' => 'XLVP HC / HS',
-                    'route' => 'violations'
-                ],
-            ]
+            'route' => 'violations'
         ],
         [
             'title' => 'Khác',
             'icon' => 'fa fa-github',
             'name' => ['others'],
-            'items' => [
-                [
-                    'title' => 'Khác',
-                    'route' => 'others'
-                ],
-            ]
+            'route' => 'others'
         ],
         [
             'title' => 'Mặt hàng XNK',
             'icon' => 'fa fa-github',
             'name' => ['merchandises'],
-            'items' => [
-                [
-                    'title' => 'Mặt hàng XNK',
-                    'route' => 'merchandises'
-                ],
-            ]
+            'route' => 'merchandises'
         ],
     ]
 ];

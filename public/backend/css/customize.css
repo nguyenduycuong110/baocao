@@ -1640,3 +1640,7 @@ table{
     margin-right: 5px;
     cursor: pointer;
 }
+.board .text-right{
+    text-align: right;
+    padding-right: 18px;
+}

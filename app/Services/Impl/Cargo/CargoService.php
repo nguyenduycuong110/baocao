@@ -35,6 +35,5 @@ class CargoService extends BaseService implements CargoServiceInterface{
         }
         return $this;
     }
-   
 
 }
