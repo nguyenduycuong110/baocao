@@ -4,6 +4,7 @@ namespace App\Http\Requests\Passenger\Passenger;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -27,7 +28,11 @@ class UpdateRequest extends FormRequest
     {
         return [
             'departure' => 'required',
-            'entry' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('passengers', $this->id)
+            ],
         ];
     }
 

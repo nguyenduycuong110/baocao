@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Consultation\Consultation;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -25,6 +26,11 @@ class StoreRequest extends FormRequest
             'declaration' => 'required',
             'accept_value' => 'required',
             'reject_value' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('consultations', $this->route('id'))
+            ],
         ];
     }
 }

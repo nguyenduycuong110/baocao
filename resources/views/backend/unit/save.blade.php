@@ -48,7 +48,8 @@
                                     type="text" 
                                     name="total_unit_personnel" 
                                     value="{{ old('total_unit_personnel', ($model->total_unit_personnel) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right"
+                                     style="background:#eaeaea"
                                 >
                             </td>
                         </tr>
@@ -60,67 +61,84 @@
                                     type="text" 
                                     name="present_personnel" 
                                     value="{{ old('present_personnel', ($model->present_personnel) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right"
+                                    readonly
+                                     style="background:#eaeaea"
                                 >
                             </td>
                         </tr>
                         <tr>
-                            <td class="center">3</td>
+                            <td class="center">2.1</td>
                             <td class="subcategory-cell">Trực lãnh đạo</td>
                             <td>
                                 <input 
                                     type="text" 
                                     name="leadership_duty" 
                                     value="{{ old('leadership_duty', ($model->leadership_duty) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right"
                                 >
                             </td>
                         </tr>
+                         <tr>
+                            <td class="center">2.2</td>
+                            <td class="subcategory-cell">CBCC</td>
+                            <td>
+                                <input 
+                                    type="text" 
+                                    name="present_cbcc" 
+                                    value="{{ old('present_cbcc', ($model->present_cbcc) ?? '' ) }}" 
+                                    class="text-right"
+                                >
+                            </td>
+                        </tr>
+                        
                         <tr>
-                            <td class="center">4</td>
+                            <td class="center">3</td>
                             <td class="category-cell">Vắng mặt</td>
                             <td class="text-right pr32 text-danger">
                                 <input 
                                     type="text" 
                                     name="absent_personnel" 
                                     value="{{ old('absent_personnel', ($model->absent_personnel) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right"
+                                    readonly
+                                    style="background:#eaeaea"
                                 >
                             </td>
                         </tr>
                         <tr>
-                            <td class="center">4.1</td>
+                            <td class="center">3.1</td>
                             <td class="subcategory-cell">Học tập</td>
                             <td>
                                 <input 
                                     type="text" 
                                     name="training_absence" 
                                     value="{{ old('training_absence', ($model->training_absence) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right"
                                 >
                             </td>
                         </tr>
                         <tr>
-                            <td class="center">4.2</td>
+                            <td class="center">3.2</td>
                             <td class="subcategory-cell">Nghỉ phép</td>
                             <td>
                                 <input 
                                     type="text" 
                                     name="leave_absence" 
                                     value="{{ old('leave_absence', ($model->leave_absence) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right"
                                 >
                             </td>
                         </tr>
                         <tr>
-                            <td class="center">4.3</td>
+                            <td class="center">3.3</td>
                             <td class="subcategory-cell">Nghỉ bù</td>
                             <td>
                                 <input 
                                     type="text" 
                                     name="compensatory_leave" 
                                     value="{{ old('compensatory_leave', ($model->compensatory_leave) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right"
                                 >
                             </td>
                         </tr>

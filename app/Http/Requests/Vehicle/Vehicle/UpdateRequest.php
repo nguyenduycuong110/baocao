@@ -4,6 +4,7 @@ namespace App\Http\Requests\Vehicle\Vehicle;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -30,6 +31,11 @@ class UpdateRequest extends FormRequest
             'boats_exit' => 'required',
             'car_entry' => 'required',
             'boats_entry' => 'required',
+             'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('vehicles', $this->id)
+            ],
         ];
     }
 

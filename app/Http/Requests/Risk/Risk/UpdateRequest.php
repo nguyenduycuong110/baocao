@@ -4,6 +4,7 @@ namespace App\Http\Requests\Risk\Risk;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -34,6 +35,11 @@ class UpdateRequest extends FormRequest
             'act_disb_setup' => 'required',
             'item_profile_set' => 'required',
             'bus_profile_set' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('risks', $this->id)
+            ],
         ];
     }
 

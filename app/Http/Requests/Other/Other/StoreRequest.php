@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Other\Other;
 
+use App\Rules\UniqueEntryDate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class StoreRequest extends FormRequest
 {
@@ -26,6 +29,11 @@ class StoreRequest extends FormRequest
             'business_info' => 'required',
             'issue_solving' => 'required',
             'regulation_proposal' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('others', $this->route('id'))
+            ],
         ];
     }
 }

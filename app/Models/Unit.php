@@ -25,6 +25,7 @@ class Unit extends Model
         'close',
         'person_close_id',
         'publish',
+        'present_cbcc'
     ];
 
 

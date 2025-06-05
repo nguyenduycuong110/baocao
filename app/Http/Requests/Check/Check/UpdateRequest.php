@@ -4,6 +4,7 @@ namespace App\Http\Requests\Check\Check;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class UpdateRequest extends FormRequest
 {
@@ -28,6 +29,11 @@ class UpdateRequest extends FormRequest
         return [
             'department_level' => 'required',
             'branch_level' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('checks', $this->id)
+            ],
         ];
     }
 

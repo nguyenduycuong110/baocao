@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Tax\Tax;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -34,6 +35,11 @@ class StoreRequest extends FormRequest
             'tax_collection_declaration' => 'required',
             'tax_amount' => 'required',
             'business' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('taxes', $this->route('id'))
+            ],
         ];
     }
 }

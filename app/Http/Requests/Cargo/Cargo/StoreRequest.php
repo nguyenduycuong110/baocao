@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Cargo\Cargo;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use App\Rules\UniqueEntryDate;
 
 class StoreRequest extends FormRequest
 {
@@ -41,6 +44,11 @@ class StoreRequest extends FormRequest
             'incoming_transit' => 'required',
             'outgoing_transit_turnover' => 'required',
             'incoming_transit_turnover' => 'required',
+            'entry_date' => [
+                'required',
+                'date_format:d/m/Y',
+                new UniqueEntryDate('cargos', $this->id)
+            ],
         ];
     }
 }
