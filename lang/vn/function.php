@@ -108,193 +108,73 @@ $modules = [
             'title' => 'Tình hình đơn vị',
             'icon' => 'fa fa-github',
             'name' => ['units'],
-<<<<<<< HEAD
             'route' => 'units'
-=======
-            'route' => 'units',
-            'items' => [
-                [
-                    'title' => 'Tình hình đơn vị',
-                    'route' => 'units'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'PTVT XNC, QC',
             'icon' => 'fa fa-github',
             'name' => ['vehicles'],
-<<<<<<< HEAD
             'route' => 'vehicles'
-=======
-            'route' => 'vehicles',
-            'items' => [
-                [
-                    'title' => 'PTVT XNC, QC',
-                    'route' => 'vehicles'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'Hành khách XNC',
             'icon' => 'fa fa-github',
             'name' => ['passengers'],
-<<<<<<< HEAD
             'route' => 'passengers'
-=======
-            'route' => 'passengers',
-            'items' => [
-                [
-                    'title' => 'Hành khách XNC',
-                    'route' => 'passengers'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'TQ hàng hóa XNK',
             'icon' => 'fa fa-github',
             'name' => ['cargos'],
-<<<<<<< HEAD
             'route' => 'cargos'
-=======
-            'route' => 'cargos',
-            'items' => [
-                [
-                    'title' => 'TQ hàng hóa XNK',
-                    'route' => 'cargos'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'QL Rủi Ro',
             'icon' => 'fa fa-github',
             'name' => ['risks'],
-<<<<<<< HEAD
             'route' => 'risks'
-=======
-            'route' => 'risks',
-            'items' => [
-                [
-                    'title' => 'QL Rủi Ro',
-                    'route' => 'risks'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'QL Thuế',
             'icon' => 'fa fa-github',
             'name' => ['taxes'],
-<<<<<<< HEAD
             'route' => 'taxes'
-=======
-            'route' => 'taxes',
-            'items' => [
-                [
-                    'title' => 'QL Thuế',
-                    'route' => 'taxes'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'Tham vấn',
             'icon' => 'fa fa-github',
             'name' => ['consultations'],
-<<<<<<< HEAD
             'route' => 'consultations'
-=======
-            'route' => 'consultations',
-            'items' => [
-                [
-                    'title' => 'Tham vấn',
-                    'route' => 'consultations'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'Kiểm tra STQ',
             'icon' => 'fa fa-github',
             'name' => ['checks'],
-<<<<<<< HEAD
             'route' => 'checks'
-=======
-            'route' => 'checks',
-            'items' => [
-                [
-                    'title' => 'Kiểm tra STQ',
-                    'route' => 'checks'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'DVCTT',
             'icon' => 'fa fa-github',
             'name' => ['digitals'],
-<<<<<<< HEAD
             'route' => 'digitals'
-=======
-            'route' => 'digitals',
-            'items' => [
-                [
-                    'title' => 'DVCTT',
-                    'route' => 'digitals'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'XLVP HC / HS',
             'icon' => 'fa fa-github',
             'name' => ['violations'],
-<<<<<<< HEAD
             'route' => 'violations'
-=======
-            'route' => 'violations',
-            'items' => [
-                [
-                    'title' => 'XLVP HC / HS',
-                    'route' => 'violations'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'Khác',
             'icon' => 'fa fa-github',
             'name' => ['others'],
-<<<<<<< HEAD
             'route' => 'others'
-=======
-            'route' => 'others',
-            'items' => [
-                [
-                    'title' => 'Khác',
-                    'route' => 'others'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
         [
             'title' => 'Mặt hàng XNK',
             'icon' => 'fa fa-github',
             'name' => ['merchandises'],
-<<<<<<< HEAD
             'route' => 'merchandises'
-=======
-            'route' => 'merchandises',
-            'items' => [
-                [
-                    'title' => 'Mặt hàng XNK',
-                    'route' => 'merchandises'
-                ],
-            ]
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
         ],
     ]
 ];
