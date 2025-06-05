@@ -2,11 +2,7 @@
 namespace App\Repositories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
 
-=======
-use Illuminate\Support\Facades\DB;
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
 
 class BaseRepository {
     protected $model;
@@ -77,7 +73,6 @@ class BaseRepository {
     
     public function getLatestEntryDate()
     {
-<<<<<<< HEAD
         return $this->model->max('entry_date');
     }
 
@@ -97,24 +92,11 @@ class BaseRepository {
         }, $fields)))
             ->whereBetween('entry_date', [$startOfMonth, $cutoffDate->endOfDay()])
             ->whereIn('user_id', $userIds)
-=======
-        $auth = Auth::user();
-        $userTeamIds = DB::table('users')->where('team_id', $auth->team_id)->get()->pluck('id')->toArray();
-
-        return $this->model->selectRaw('MONTH(entry_date) as month, ' . implode(', ', array_map(function($field) {
-            return "SUM(`{$field}`) as total_$field";
-        }, $fields)))
-            ->whereRaw('MONTH(entry_date) = ?', [$month])
-            ->where('entry_date', '<=', now()->endOfDay()) 
-            ->whereIn('user_id', $userTeamIds)
-            ->groupBy('month')
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
             ->first();
     }
 
     public function accumulatedYear($fields = [], $cutoffDate, $userIds)
     {
-<<<<<<< HEAD
 
         $temp = [
             0 => Auth::user()->id
@@ -129,18 +111,6 @@ class BaseRepository {
         }, $fields)))
             ->whereBetween('entry_date', [$startOfYear, $cutoffDate->endOfDay()])
             ->whereIn('user_id', $userIds)
-=======
-        $auth = Auth::user();
-        $userTeamIds = DB::table('users')->where('team_id', $auth->team_id)->get()->pluck('id')->toArray();
-
-        return $this->model->selectRaw('YEAR(entry_date) as year, ' . implode(', ', array_map(function($field) {
-            return "SUM(`{$field}`) as total_$field";
-        }, $fields)))
-            ->whereRaw('YEAR(entry_date) = ?', [$year])
-            ->where('entry_date', '<=', now()->endOfDay()) 
-            ->whereIn('user_id', $userTeamIds)
-            ->groupBy('year')
->>>>>>> 00b77f50c1b39279f711d627a6ce349fb29551e0
             ->first();
     }
 
