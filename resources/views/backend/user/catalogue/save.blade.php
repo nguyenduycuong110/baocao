@@ -111,7 +111,7 @@
                                         <input 
                                             type="checkbox" 
                                             name="permissions[]" 
-                                            value="{{ $permission->id }}" class="form-control"
+                                            value="{{ $permission->id }}" class="form-control checkBoxPermissionItem"
                                             {{ (isset($model) && collect($model->permissions)->contains('id', $permission->id)) || in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}
                                         >
                                     </td>

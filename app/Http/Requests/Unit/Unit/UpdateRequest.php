@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
         return [
             'total_unit_personnel' => 'required',
             'present_personnel' => 'required',
+            'present_cbcc' => 'required',
             'leadership_duty' => 'required',
             'absent_personnel' => 'required',
             'training_absence' => 'required',
@@ -37,7 +38,7 @@ class UpdateRequest extends FormRequest
             'entry_date' => [
                 'required',
                 'date_format:d/m/Y',
-                new UniqueEntryDate('taxes', $this->id)
+                new UniqueEntryDate('taxes', $this->route('unit'))
             ],
         ];
     }

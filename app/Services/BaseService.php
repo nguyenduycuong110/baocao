@@ -102,6 +102,7 @@ abstract class BaseService implements BaseServiceInterface{
 
     private function saveModel(?int $id = null): self{
         if($id){
+            $this->modelData['id'] = $id;
             $this->model = $this->repository->update($id, $this->modelData);
         }else{
             $this->model = $this->repository->create($this->modelData);
@@ -217,6 +218,9 @@ abstract class BaseService implements BaseServiceInterface{
 
     public function mergeRequest($request){
         $auth = Auth::user();
+        if($auth->user_catalogues->level == 1 || $auth->user_catalogues->level == 2){
+            return $request;
+        }
         $level = $auth->user_catalogues->level;
         if($level == self::OFFICER_ID){
             $request->merge([

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Auth\AuthController;
 use App\Http\Controllers\Web\Dashboard\DashboardController;
+use App\Http\Controllers\Web\Report\ReportController;
 use App\Http\Controllers\Web\User\UserCatalogueController;
 use App\Http\Controllers\Web\User\UserController;
 use App\Http\Controllers\Web\Permission\PermissionController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Web\Merchandise\MerchandiseController;
 use App\Http\Controllers\Web\Unit\UnitController;
 use App\Http\Controllers\Web\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Web\Ajax\LocationController as AjaxLocationController;
+use App\Http\Controllers\Web\Ajax\ReportController as AjaxReportController;
 
 Route::middleware(['noAuth'])->group(function(){
     Route::get('admin', [AuthController::class, 'index'])->name('auth.login');
@@ -28,9 +30,15 @@ Route::middleware(['noAuth'])->group(function(){
 });
 
 Route::middleware(['auth'])->group(function(){
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::get('report', [ReportController::class, 'index'])->name('report.index');
+
     Route::get('signout', [AuthController::class, 'signout'])->name('auth.signout');
+
     Route::get('users/profile', [UserController::class, 'profile'])->name('users.profile');
+
     Route::patch('users/{id}/profile/update', [UserController::class, 'updateProfile'])->name('users.profile.update');
 
     Route::middleware(['permission'])->group(function(){
@@ -90,6 +98,9 @@ Route::middleware(['auth'])->group(function(){
     /*Ajax*/
     
     Route::post('ajax/dashboard/changeStatus', [AjaxDashboardController::class, 'changeStatus'])->name('ajax.dashboard.changeStatus');
+    
     Route::get('ajax/location/getLocation', [AjaxLocationController::class, 'getLocation'])->name('ajax.location.index');
+
+    Route::post('ajax/report/export', [AjaxReportController::class, 'export'])->name('ajax.report.export');
    
 });

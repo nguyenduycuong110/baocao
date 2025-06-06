@@ -464,9 +464,76 @@
 
     // Khởi tạo - chỉ bind events, không tính toán lần đầu
     bindEvents();
-}
+    }
+
+
+    HT.exportExcel = () => {
+        $(document).on('click', '.btn-export', function(e){
+            e.preventDefault()
+            let _this = $(this)
+            let exportType = _this.val()
+            const dateType = $('.date-type').val()
+            let date = (dateType === 'month') ? $('.evaluation-time').val() : $('.evaluation-day').val() ;
+            let option = {date : date}
+            HT.setupDataForExport(exportType, option);
+        })
+
+    }
+
+    HT.setupDataForExport = (type, option) => {
+        const loadingOverlay = $('<div class="loading-overlay">Đang tải file...</div>');
+        $('body').append(loadingOverlay);
+        $.ajax({
+            url: 'ajax/report/export', 
+            type: 'POST', 
+            data: {
+                ...option,
+                _token: $('meta[name="csrf-token"]').attr('content') 
+            },
+            dataType: 'json', 
+            success: function(res) {
+                if (res.status === 'success') {
+                    const link = document.createElement('a');
+                    link.href = res.file_url;
+                    link.download = res.filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    console.error('Error:', res.message);
+                }
+    
+                loadingOverlay.remove();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('AJAX Error:', textStatus, errorThrown);
+                loadingOverlay.remove();
+            }
+        });
+    }
+
+    HT.checkAllPermission = () => {
+        if ($('#checkAllPermission').length) {
+            $('#checkAllPermission').on('change', function() {
+                let isChecked = $(this).prop('checked');
+                
+                $('.checkBoxPermissionItem').each(function() {
+                    if (isChecked) {
+                        $(this).attr('checked', 'checked');
+                        $(this).prop('checked', true);
+                    } else {
+                        $(this).removeAttr('checked');
+                        $(this).prop('checked', false);
+                    }
+                });
+            });
+        }
+    };
+
 
 	$(document).ready(function(){
+        HT.checkAllPermission()
+        HT.exportExcel()
         HT.deleteTr()
         HT.addTr()
         HT.triggerDate()

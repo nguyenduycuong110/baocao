@@ -55,6 +55,7 @@ class MerchandiseService extends BaseService implements MerchandiseServiceInterf
     public function saveModel(?int $id = null): self{
         $method = $id != null ? 'update' : 'create';
         if($id){
+            $this->modelData['id'] = $id;
             $this->model = $this->repository->update($id, $this->modelData);
         }else{
             $this->model = $this->repository->create($this->modelData);

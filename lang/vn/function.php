@@ -33,6 +33,13 @@ $fullMenu = [
             'class' => 'special'
         ],
         [
+            'title' => 'Kết xuất',
+            'icon' => 'fa fa-github',
+            'name' => ['report'],
+            'route' => 'report',
+            'class' => 'special'
+        ],
+        [
             'title' => 'QL Cán Bộ',
             'icon' => 'fa fa-user',
             'name' => ['users','user_catalogues', 'permissions', 'teams'],
@@ -59,7 +66,7 @@ $fullMenu = [
 ];
 $filteredModule = [];
 foreach ($fullMenu['module'] as $module) {
-    if (in_array('dashboard', $module['name'])) {
+    if (in_array('dashboard', $module['name']) || in_array('report', $module['name'])) {
         $filteredModule[] = $module;
         continue;
     }
@@ -97,10 +104,13 @@ if(!count($user->permission_modules)){
 /*User_permision_module*/
 
 $userModulePermissions = [];
+
 foreach($user->permission_modules as $k => $v){
     $userModulePermissions[] = $v->module;
 }
+
 $userModulePermissions = array_unique($userModulePermissions);
+
 $modules = [
     'module' => 
     [

@@ -33,7 +33,7 @@ class UpdateRequest extends FormRequest
             'entry_date' => [
                 'required',
                 'date_format:d/m/Y',
-                new UniqueEntryDate('consultations', $this->id)
+                new UniqueEntryDate('consultations', $this->route('consultation'))
             ],
         ];
     }

@@ -21,6 +21,7 @@ class Merchandise extends Model
         'person_close_id',
     ];
 
+    protected $table = 'merchandises';
 
     protected $with = ['users', 'person_close'];
 

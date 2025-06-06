@@ -30,19 +30,22 @@ class UniqueEntryDate implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-
         $auth = Auth::user();
+        
         $auth->load('teams');
        
         $teamUserIds = DB::table('users')->where('team_id', $auth->team_id)->pluck('id')->toArray();
 
-        
         $entryDate = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+
         $query = DB::table($this->table)->whereDate($this->column, $entryDate)->whereIn('user_id', $teamUserIds);
+
         if($this->ignoreId){
-            $query->where('id', '!=', $this->ignoreId);
+            $query->where('id', '<>', $this->ignoreId);
         }
+
         $exists = $query->exists();
+
         if($exists){
             $fail("Đã có bản ghi được tạo vào ngày {$value}. Mỗi ngày chỉ được tạo 1 bản ghi");
         }

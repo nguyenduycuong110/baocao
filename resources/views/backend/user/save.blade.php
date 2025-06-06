@@ -276,6 +276,11 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <table class="table table-striped table-bordered custom">
+                            <thead>
+                                <th>
+                                    <input type="checkbox" value="" id="checkAllPermission" class="input-checkbox">
+                                </th>
+                            </thead>
                             @foreach($permissions as $permission)
                                 @if($permission->module == 'user_catalogues' || $permission->module == 'users' || $permission->module == 'permissions' || $permission->module == 'teams') 
                                     @continue; 
@@ -288,7 +293,7 @@
                                         <input 
                                             type="checkbox" 
                                             name="permission_modules[]" 
-                                            value="{{ $permission->id }}" class="form-control"
+                                            value="{{ $permission->id }}" class="form-control checkBoxPermissionItem"
                                             {{ (isset($model) && collect($model->permission_modules)->contains('id', $permission->id)) || in_array($permission->id, old('permission_modules', [])) ? 'checked' : '' }}
                                         >
                                     </td>

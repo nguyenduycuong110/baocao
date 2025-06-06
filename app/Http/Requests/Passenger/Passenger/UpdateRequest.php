@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
             'entry_date' => [
                 'required',
                 'date_format:d/m/Y',
-                new UniqueEntryDate('passengers', $this->id)
+                new UniqueEntryDate('passengers', $this->route('passenger'))
             ],
         ];
     }

@@ -23,10 +23,11 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            
             'entry_date' => [
                 'required',
                 'date_format:d/m/Y',
-                new UniqueEntryDate('merchandise', $this->route('id'))
+                new UniqueEntryDate('merchandises', $this->route('id'))
             ],
         ];
     }

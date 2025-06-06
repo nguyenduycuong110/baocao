@@ -42,7 +42,7 @@ class UpdateRequest extends FormRequest
             'entry_date' => [
                 'required',
                 'date_format:d/m/Y',
-                new UniqueEntryDate('taxes', $this->id)
+                new UniqueEntryDate('taxes', $this->route('tax'))
             ],
         ];
     }

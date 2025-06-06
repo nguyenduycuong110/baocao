@@ -34,7 +34,7 @@ class UpdateRequest extends FormRequest
              'entry_date' => [
                 'required',
                 'date_format:d/m/Y',
-                new UniqueEntryDate('vehicles', $this->id)
+                new UniqueEntryDate('vehicles', $this->route('vehicle'))
             ],
         ];
     }
@@ -42,7 +42,7 @@ class UpdateRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'id' => $this->route('vihicle')
+            'id' => $this->route('vehicle')
         ]);
     }
 

@@ -23,6 +23,7 @@
                     </thead>
                     <tbody>
                         @foreach($records as $record)
+                            
                             <tr >
                                 <td class="text-center">
                                     <input type="checkbox" value="{{ $record->id }}" class="input-checkbox checkBoxItem">
@@ -36,7 +37,7 @@
                                     <a 
                                         href="{{ route("{$config['route']}.edit", $record->id) }}" 
                                         class="btn btn-success" 
-                                        {{ ($record->close == 1) && $record->person_close->user_catalogues->level < $auth->user_catalogues->level ? 'disabled' : '' }}
+                                        {{  ($record->close == 1) && isset($record->person_close) && $record->person_close->user_catalogues->level < $auth->user_catalogues->level ? 'disabled' : '' }}
                                     >
                                         <i class="fa fa-edit"></i>
                                     </a>
