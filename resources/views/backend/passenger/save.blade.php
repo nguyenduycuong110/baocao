@@ -34,6 +34,7 @@
                         $departureYear = isset($accumulated['accumulatedYear']->total_departure) ? $accumulated['accumulatedYear']->total_departure : '';
                         $entryMonth = isset($accumulated['accumulatedMonth']->total_entry) ? $accumulated['accumulatedMonth']->total_entry : '';
                         $entryYear = isset($accumulated['accumulatedYear']->total_entry) ? $accumulated['accumulatedYear']->total_entry : '';
+                        $count_turn = isset($model) ?  $model->departure + $model->entry : '';
                     @endphp
                     <tbody>
                         <tr class="green-bg">
@@ -98,6 +99,17 @@
                             @else
                                 <input type="hidden" name="user_id" value="{{ $model->user_id }}">
                             @endif
+                        </tr>
+                        <tr class="unit-row">
+                            <td rowspan="2" class="stt-column"></td>
+                            <td rowspan="2" class="left-text">Tổng số</td>
+                        </tr>
+                        <tr class="value-row">
+                            <td class="small-text"></td>
+                            <td class="">{{ $count_turn }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

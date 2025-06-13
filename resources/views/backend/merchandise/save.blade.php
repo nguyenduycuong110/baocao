@@ -57,7 +57,13 @@
                             <td></td>
                         </tr>
                         @if(isset($model->merchandise_products))
+                            @php
+                               $count = 0;
+                            @endphp
                             @foreach($model->merchandise_products as $k => $item)
+                                @php
+                                    $count += $item->value;
+                                @endphp
                                 <tr>
                                     <td class="center">{{ $k + 1 }}</td>
                                     <td>
@@ -75,8 +81,8 @@
                                         <input 
                                             type="text" 
                                             name="merchandise_products[value][]" 
-                                            value="{{ convert_price($item->value, true) }}"
-                                            class="text-right int"
+                                            value="{{ convert_price_usd($item->value, true) }}"
+                                            class="text-right int-usd"
                                         >
                                     </td>
                                     <td>
@@ -117,7 +123,7 @@
                                         type="text" 
                                         name="merchandise_products[value][]" 
                                         value=""
-                                        class="text-right int"
+                                        class="text-right int-usd"
                                     >
                                 </td>
                                 <td>
@@ -129,6 +135,16 @@
                                 <td></td>
                             </tr>
                         @endif
+                        <tr class="unit-row">
+                            <td rowspan="2" class="stt-column"></td>
+                            <td rowspan="2" class="left-text">Tổng số</td>
+                            <td class="centered-text"></td>
+                            <td>
+                                {{ isset($model) ? convert_price_usd($count, true) : '' }}
+                            </td> 
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
                 @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )

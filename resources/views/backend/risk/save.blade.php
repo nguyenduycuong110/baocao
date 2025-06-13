@@ -208,6 +208,25 @@
                             </td>
                             <td></td>
                         </tr>
+                        @php
+                            $count_sheet = isset($model) ? ($model->flow_decl + $model->stop_via_supervision + $model->violated_decl ) : '';
+                            $count_turn = isset($model) ? ($model->collect_bus_info + $model->prop_disb_setup + $model->act_disb_setup + $model->item_profile_set + $model->bus_profile_set) : '';
+                        @endphp
+                        <tr class="unit-row">
+                            <td rowspan="2" class="stt-column"></td>
+                            <td rowspan="2" class="left-text">Tổng số</td>
+                            <td class="centered-text">Tờ</td>
+                            <td>{{ $count_sheet }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="value-row">
+                            <td class="small-text">Lượt</td>
+                            <td>{{ $count_turn }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                         @if($config['method'] == 'create')
                             <input type="hidden" name="user_id" value="{{ $auth->id }}">
                         @else

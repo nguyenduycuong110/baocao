@@ -129,6 +129,21 @@
                             <td></td>
                             <input type="hidden" name="user_id" value="{{ $auth->id }}">
                         </tr>
+                        <tr class="unit-row">
+                            <td rowspan="2" class="stt-column"></td>
+                            <td rowspan="2" class="left-text">Tổng số</td>
+                            <td class="centered-text">Lượt</td>
+                            <td>{{ isset($model) ? ($model->admin_guidelines + $model->business_info) : '' }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="value-row">
+                            <td class="small-text">Vụ</td>
+                            <td>{{ isset($model) ? ($model->issue_solving + $model->regulation_proposal) : '' }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

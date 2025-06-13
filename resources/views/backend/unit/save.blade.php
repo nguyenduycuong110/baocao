@@ -43,7 +43,7 @@
                         <tr>
                             <td class="center">1</td>
                             <td class="category-cell">Tổng số quân đơn vị</td>
-                            <td class="text-right pr32 text-danger">
+                            <td class="pr32 text-danger">
                                 <input 
                                     type="text" 
                                     name="total_unit_personnel" 
@@ -95,7 +95,7 @@
                         <tr>
                             <td class="center">3</td>
                             <td class="category-cell">Vắng mặt</td>
-                            <td class="text-right pr32 text-danger">
+                            <td class=" pr32 text-danger">
                                 <input 
                                     type="text" 
                                     name="absent_personnel" 

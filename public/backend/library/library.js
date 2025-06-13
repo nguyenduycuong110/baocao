@@ -147,26 +147,17 @@
 
     HT.int = () => {
         $(document).on('change keyup blur', '.int', function(){
-            let _this = $(this)
-            let value = _this.val()
-            if(value === ''){
+            let value = $(this).val().replace(/,/gi, "")
+            if(value === '' || isNaN(value)) {
                 $(this).val('0')
-            }
-            value = value.replace(/\./gi, "")
-            _this.val(HT.addCommas(value))
-            if(isNaN(value)){
-                _this.val('0')
+            } else {
+                $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ','))
             }
         })
 
         $(document).on('keydown', '.int', function(e){
-            let _this = $(this)
-            let data = _this.val()
-            if(data == 0){
-                let unicode = e.keyCode || e.which;
-                if(unicode != 190){
-                    _this.val('')
-                }
+            if($(this).val() == 0 && e.keyCode != 188) {
+                $(this).val('')
             }
         })
     }
@@ -367,7 +358,7 @@
                             type="text" 
                             name="merchandise_products[value][]" 
                             value=""
-                            class="text-right int"
+                            class="text-right int-usd"
                         >
                     </td>
                     <td></td>
@@ -380,7 +371,7 @@
                     </td>
                 </tr>
             `;
-            $('table tbody').append(html);
+            $('table tbody tr.unit-row:first').before(html)
             HT.rowCount++;
         })
     }
@@ -531,7 +522,35 @@
     };
 
 
+    HT.intUsd = () => {
+        $(document).on('input', '.int-usd', function(){
+            let _this = $(this)
+            let cursorPos = this.selectionStart
+            let value = _this.val().replace(/,/g, "")
+            
+            if(value === '' || isNaN(value)) {
+                _this.val('0.00')
+            } else {
+                let num = parseFloat(value).toFixed(2)
+                let formatted = num.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                _this.val(formatted)
+                
+                // Điều chỉnh vị trí con trở lại
+                let newPos = cursorPos + (formatted.length - _this.val().replace(formatted, _this.val()).length)
+                this.setSelectionRange(newPos, newPos)
+            }
+        })
+        
+        $(document).on('focus', '.int-usd', function(){
+            if($(this).val() == '0.00') {
+                $(this).select()
+            }
+        })
+    }
+
+
 	$(document).ready(function(){
+        HT.intUsd()
         HT.checkAllPermission()
         HT.exportExcel()
         HT.deleteTr()

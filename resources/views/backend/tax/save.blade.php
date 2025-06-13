@@ -52,8 +52,8 @@
                             <td class="center">1</td>
                             <td class="category-cell">Tổng thu thuế</td>
                             <td></td>
-                            <td class="text-right pr32 text-danger">
-                                
+                            <td class="pr32 text-danger">
+                                {{ isset($model) ? $model->vat_tax +  $model->export_import_tax + $model->income_tax + $model->personal_income_tax + $model->other_revenue : ''  }}
                             </td>
                             <td class="text-danger"></td>
                             <td class="text-danger"></td>
@@ -165,8 +165,8 @@
                             <td class="center">2</td>
                             <td class="category-cell">Hoàn thuế</td>
                             <td></td>
-                            <td class="text-right pr32 text-danger">
-                                
+                            <td class=" pr32 text-danger">
+                                {{ isset($model) ? $model->refunded_tax_declaration +  $model->refunded_tax_amount  : ''  }}
                             </td>
                             <td class="text-danger">
                                 
@@ -226,8 +226,8 @@
                             <td class="center">3</td>
                             <td class="category-cell">Tổng số nợ đọng</td>
                             <td></td>
-                            <td class="text-right pr32 text-danger">
-                                
+                            <td class="pr32 text-danger">
+                                {{ isset($model) ? $model->current_debt +  $model->overdue_debt  : ''  }}
                             </td>
                             <td class="text-danger">
                                 
@@ -287,8 +287,8 @@
                             <td class="center">4</td>
                             <td class="category-cell">Thu thuế 24/7</td>
                             <td></td>
-                            <td class="text-right pr32 text-danger">
-                                
+                            <td class=" pr32 text-danger">
+                                {{ isset($model) ? $model->tax_collection_declaration +  $model->tax_amount + $model->business  : ''  }}
                             </td>
                             <td class="text-danger">
                                 

@@ -52,8 +52,12 @@
                             <td>1</td>
                             <td>TK Xuất khẩu</td>
                             <td class="center">Tờ</td>
-                            <td class="number"></td>
-                            <td class="number"></td>
+                            <td class="number">
+                                {{ isset($model) ? ($model->green_channel + $model->yellow_channel + $model->red_channel + $model->void_declaration ) : '' }}
+                            </td>
+                            <td class="number">
+                                
+                            </td>
                             <td class="number"></td>
                             <td class="number"></td>
                         </tr>
@@ -142,7 +146,9 @@
                             <td>2</td>
                             <td>TK Nhập khẩu</td>
                             <td class="center">Tờ</td>
-                            <td class="number"></td>
+                            <td class="number">
+                                {{ isset($model) ? ($model->green_channel_import + $model->yellow_channel_import + $model->red_channel_import + $model->void_declaration_import ) : '' }}
+                            </td>
                             <td class="number"></td>
                             <td class="number"></td>
                             <td class="number"></td>
@@ -232,7 +238,9 @@
                             <td>3</td>
                             <td>TK tạm nhập, tái xuất</td>
                             <td class="center">Tờ</td>
-                            <td class="number"></td>
+                            <td class="number">
+                                {{ isset($model) ? ($model->temp_import + $model->reexport + $model->overdue_not_reexported ) : '' }}
+                            </td>
                             <td class="number"></td>
                             <td class="number"></td>
                             <td class="number"></td>
@@ -246,7 +254,7 @@
                                     type="text" 
                                     name="temp_import" 
                                     value="{{ old('temp_import', ($model->temp_import) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right int-usd"
                                 >
                             </td>
                             <td class="number">
@@ -266,7 +274,7 @@
                                     type="text" 
                                     name="reexport" 
                                     value="{{ old('reexport', ($model->reexport) ?? '' ) }}" 
-                                    class="text-right int"
+                                    class="text-right int-usd"
                                 >
                             </td>
                             <td class="number">
@@ -298,7 +306,9 @@
                             <td>4</td>
                             <td>Kim ngạch hàng hóa XNK</td>
                             <td class="center">USD</td>
-                            <td class="number"></td>
+                            <td class="number">
+                                {{ isset($model) ? convert_price_usd($model->export_turnover + $model->import_turnover, true) : '' }}
+                            </td>
                             <td class="number"></td>
                             <td class="number"></td>
                             <td class="number"></td>
@@ -311,12 +321,12 @@
                                 <input 
                                     type="text" 
                                     name="export_turnover" 
-                                    value="{{ old('export_turnover', (isset($model) ? convert_price($model->export_turnover , true) : '' )) }}" 
-                                    class="text-right int"
+                                    value="{{ old('export_turnover', (isset($model) ? convert_price_usd($model->export_turnover , true) : '' )) }}" 
+                                    class="text-right int-usd"
                                 >
                             </td>
-                            <td class="number">{{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_export_turnover, true) : null }}</td>
-                            <td class="number">{{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_export_turnover, true) : null }}</td>
+                            <td class="number">{{ !is_null($accumulated['accumulatedMonth']) ? convert_price_usd($accumulated['accumulatedMonth']->total_export_turnover, true) : null }}</td>
+                            <td class="number">{{ !is_null($accumulated['accumulatedYear']) ? convert_price_usd($accumulated['accumulatedYear']->total_export_turnover, true) : null }}</td>
                             <td class="number"></td>
                         </tr>
                         <tr class="level-1">
@@ -327,12 +337,12 @@
                                 <input 
                                     type="text" 
                                     name="import_turnover" 
-                                    value="{{ old('import_turnover', (isset($model) ? convert_price($model->import_turnover , true) : '' )) }}" 
-                                    class="text-right int"
+                                    value="{{ old('import_turnover', (isset($model) ? convert_price_usd($model->import_turnover , true) : '' )) }}" 
+                                    class="text-right int-usd"
                                 >
                             </td>
-                            <td class="number">{{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_import_turnover, true) : null }}</td>
-                            <td class="number">{{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_import_turnover, true) : null }}</td>
+                            <td class="number">{{ !is_null($accumulated['accumulatedMonth']) ? convert_price_usd($accumulated['accumulatedMonth']->total_import_turnover, true) : null }}</td>
+                            <td class="number">{{ !is_null($accumulated['accumulatedYear']) ? convert_price_usd($accumulated['accumulatedYear']->total_import_turnover, true) : null }}</td>
                             <td class="number"></td>
                         </tr>
                         <tr class="level-1">
@@ -381,7 +391,8 @@
                         <tr class="level-0 green-bg">
                             <td>IV</td>
                             <td>HÀNG QUÁ CẢNH</td>
-                            <td class="center"></td>
+                            <td class="center">
+                            </td>
                             <td class="number"></td>
                             <td class="number"></td>
                             <td class="number"></td>
@@ -392,6 +403,7 @@
                             <td>TK quá cảnh</td>
                             <td class="center">Tờ</td>
                             <td class="number">
+                                {{ isset($model) ? ($model->outgoing_transit + $model->incoming_transit ) : '' }}
                             </td>
                             <td class="number"></td>
                             <td class="number"></td>
@@ -442,7 +454,9 @@
                             <td>2</td>
                             <td>Kim ngạch quá cảnh</td>
                             <td class="center">USD</td>
-                            <td class="number"></td>
+                            <td class="number">
+                                {{ isset($model) ? convert_price_usd($model->outgoing_transit_turnover + $model->incoming_transit_turnover, true) : '' }}
+                            </td>
                             <td class="number"></td>
                             <td class="number"></td>
                             <td class="number"></td>
@@ -455,15 +469,15 @@
                                 <input 
                                     type="text" 
                                     name="outgoing_transit_turnover" 
-                                    value="{{ old('outgoing_transit_turnover', (isset($model) ? convert_price($model->outgoing_transit_turnover , true) : '' )) }}" 
-                                    class="text-right int"
+                                    value="{{ old('outgoing_transit_turnover', (isset($model) ? convert_price_usd($model->outgoing_transit_turnover , true) : '' )) }}" 
+                                    class="text-right int-usd"
                                 >
                             </td>
                             <td class="number">
-                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_outgoing_transit_turnover, true) : null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price_usd($accumulated['accumulatedMonth']->total_outgoing_transit_turnover, true) : null }}
                             </td>
                             <td class="number">
-                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_outgoing_transit_turnover, true) : null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price_usd($accumulated['accumulatedYear']->total_outgoing_transit_turnover, true) : null }}
                             </td>
                             <td class="number"></td>
                         </tr>
@@ -475,15 +489,15 @@
                                 <input 
                                     type="text" 
                                     name="incoming_transit_turnover" 
-                                    value="{{ old('incoming_transit_turnover', (isset($model) ? convert_price($model->incoming_transit_turnover , true) : '' )) }}" 
-                                    class="text-right int"
+                                    value="{{ old('incoming_transit_turnover', (isset($model) ? convert_price_usd($model->incoming_transit_turnover , true) : '' )) }}" 
+                                    class="text-right int-usd"
                                 >
                             </td>
                             <td class="number">
-                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price($accumulated['accumulatedMonth']->total_incoming_transit_turnover, true) : null }}
+                                {{ !is_null($accumulated['accumulatedMonth']) ? convert_price_usd($accumulated['accumulatedMonth']->total_incoming_transit_turnover, true) : null }}
                             </td>
                             <td class="number">
-                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price($accumulated['accumulatedYear']->total_incoming_transit_turnover, true) : null }}
+                                {{ !is_null($accumulated['accumulatedYear']) ? convert_price_usd($accumulated['accumulatedYear']->total_incoming_transit_turnover, true) : null }}
                             </td>
                             <td class="number"></td>
                         </tr>

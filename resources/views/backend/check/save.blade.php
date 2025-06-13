@@ -101,6 +101,14 @@
                                 <input type="hidden" name="user_id" value="{{ $model->user_id }}">
                             @endif
                         </tr>
+                        <tr class="unit-row">
+                            <td rowspan="2" class="stt-column"></td>
+                            <td rowspan="2" class="left-text">Tổng số</td>
+                            <td class="centered-text"></td>
+                            <td>{{ isset($model) ? ($model->department_level + $model->branch_level) : '' }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
                 @if($auth->user_catalogues->level < 5 && $config['method'] == 'update' && $auth->user_catalogues->level < $model->users->user_catalogues->level  )

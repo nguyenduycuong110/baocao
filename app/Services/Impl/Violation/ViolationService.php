@@ -43,6 +43,7 @@ class ViolationService extends BaseService implements ViolationServiceInterface{
             $this->modelData['close'] = $request->close == 'on' ? 1 : 0;
             $this->modelData['person_close_id'] = Auth::user()->id;
         }
+
         return $this;
     }
    

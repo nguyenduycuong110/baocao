@@ -32,13 +32,13 @@ $fullMenu = [
             'route' => 'dashboard',
             'class' => 'special'
         ],
-        [
-            'title' => 'Kết xuất',
-            'icon' => 'fa fa-github',
-            'name' => ['report'],
-            'route' => 'report',
-            'class' => 'special'
-        ],
+        // [
+        //     'title' => 'Kết xuất',
+        //     'icon' => 'fa fa-github',
+        //     'name' => ['report'],
+        //     'route' => 'report',
+        //     'class' => 'special'
+        // ],
         [
             'title' => 'QL Cán Bộ',
             'icon' => 'fa fa-user',

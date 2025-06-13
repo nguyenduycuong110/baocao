@@ -74,10 +74,9 @@ class MerchandiseService extends BaseService implements MerchandiseServiceInterf
                 $payload[] = [
                     'merchandise_id' => $merchandise_id,
                     'name' => $v,
-                    'value' => convert_price($merchandise_products['value'][$k])
+                    'value' => convert_price_usd($merchandise_products['value'][$k])
                 ];
             }
-            
         }
         if($this->result->method == 'create'){
             foreach ($payload as $item) {

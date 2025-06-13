@@ -48,7 +48,10 @@
                             <td></td>
                             <td></td>
                         </tr>
-                        
+                        @php
+                            $count_cases = isset($model) ?  $model->smuggling_cases + $model->drug_cases +  $model->ip_cases + $model->admin_cases + $model->other_cases : '';
+                            $count_value = isset($model) ?  $model->smuggling_value + $model->admin_value + $model->ip_value +  $model->other_value : '';
+                        @endphp
                         <!-- Item 1 -->
                         <tr class="unit-row">
                             <td rowspan="2" class="stt-column">1</td>
@@ -251,17 +254,16 @@
                         
                         <!-- Item 6 -->
                         <tr class="unit-row">
-                            <td rowspan="2" class="stt-column">6</td>
+                            <td rowspan="2" class="stt-column"></td>
                             <td rowspan="2" class="left-text">Tổng số</td>
                             <td class="centered-text">Vụ</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ convert_price($count_cases, true) ?? null }}</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr class="value-row">
                             <td class="small-text">Trị giá (VN đồng)</td>
-                            <td></td>
+                            <td>{{ convert_price($count_value, true) ?? null }}</td>
                             <td></td>
                             <td></td>
                             <td></td>
