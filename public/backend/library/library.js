@@ -522,31 +522,126 @@
     };
 
 
-    HT.intUsd = () => {
-        $(document).on('input', '.int-usd', function(){
-            let _this = $(this)
-            let cursorPos = this.selectionStart
-            let value = _this.val().replace(/,/g, "")
+    // HT.intUsd = () => {
+    //     $(document).on('input', '.int-usd', function(){
+    //         let _this = $(this)
+    //         let cursorPos = this.selectionStart
+    //         let value = _this.val().replace(/,/g, "")
             
-            if(value === '' || isNaN(value)) {
-                _this.val('0.00')
-            } else {
-                let num = parseFloat(value).toFixed(2)
-                let formatted = num.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                _this.val(formatted)
+    //         if(value === '' || isNaN(value)) {
+    //             _this.val('0.00')
+    //         } else {
+    //             let num = parseFloat(value).toFixed(2)
+    //             let formatted = num.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    //             _this.val(formatted)
                 
-                // Điều chỉnh vị trí con trở lại
-                let newPos = cursorPos + (formatted.length - _this.val().replace(formatted, _this.val()).length)
-                this.setSelectionRange(newPos, newPos)
+    //             // Điều chỉnh vị trí con trở lại
+    //             let newPos = cursorPos + (formatted.length - _this.val().replace(formatted, _this.val()).length)
+    //             this.setSelectionRange(newPos, newPos)
+    //         }
+    //     })
+        
+    //     $(document).on('focus', '.int-usd', function(){
+    //         if($(this).val() == '0.00') {
+    //             $(this).select()
+    //         }
+    //     })
+    // }
+
+    HT.intUsd = () => {
+        $(document).on('input', '.int-usd', function(e){
+            let _this = $(this);
+            let cursorPos = this.selectionStart;
+            let value = _this.val();
+            
+            // Chỉ cho phép số, dấu chấm và dấu phẩy
+            value = value.replace(/[^0-9.,]/g, '');
+            
+            // Tách phần nguyên và phần thập phân
+            let parts = value.split('.');
+            let integerPart = parts[0].replace(/,/g, ''); // Loại bỏ dấu phẩy cũ
+            let decimalPart = parts[1] || '';
+            
+            // Giới hạn phần thập phân chỉ 2 chữ số
+            if (decimalPart.length > 2) {
+                decimalPart = decimalPart.substring(0, 2);
             }
-        })
+            
+            // Nếu không có số nào thì đặt về 0
+            if (integerPart === '') {
+                integerPart = '0';
+            }
+            
+            // Thêm dấu phẩy cho phần nguyên (thousand separator)
+            if (integerPart !== '0' || value.includes('.')) {
+                integerPart = parseInt(integerPart, 10).toLocaleString('en-US');
+            }
+            
+            // Tạo giá trị cuối cùng
+            let formattedValue = integerPart;
+            if (parts.length > 1 || value.endsWith('.')) {
+                formattedValue += '.' + decimalPart;
+            }
+            
+            // Cập nhật giá trị
+            _this.val(formattedValue);
+            
+            // Điều chỉnh vị trí con trỏ
+            let lengthDiff = formattedValue.length - value.length;
+            let newPos = Math.min(cursorPos + lengthDiff, formattedValue.length);
+            this.setSelectionRange(newPos, newPos);
+        });
         
         $(document).on('focus', '.int-usd', function(){
-            if($(this).val() == '0.00') {
-                $(this).select()
+            let _this = $(this);
+            if (_this.val() === '' || _this.val() === '0' || _this.val() === '0.00') {
+                _this.val('');
             }
-        })
-    }
+        });
+        
+        $(document).on('blur', '.int-usd', function(){
+            let _this = $(this);
+            let value = _this.val();
+            
+            if (value === '' || value === '0') {
+                _this.val('0.00');
+            } else if (value.includes('.')) {
+                // Đảm bảo có đủ 2 chữ số thập phân
+                let parts = value.split('.');
+                let decimalPart = parts[1] || '00';
+                if (decimalPart.length === 1) {
+                    decimalPart += '0';
+                }
+                _this.val(parts[0] + '.' + decimalPart);
+            } else {
+                // Thêm .00 nếu không có phần thập phân
+                _this.val(value + '.00');
+            }
+        });
+        
+        // Xử lý phím Backspace và Delete
+        $(document).on('keydown', '.int-usd', function(e){
+            let _this = $(this);
+            
+            // Cho phép các phím điều khiển
+            if (e.ctrlKey || e.altKey || e.metaKey || 
+                [8, 9, 27, 13, 46, 35, 36, 37, 38, 39, 40].includes(e.keyCode)) {
+                return;
+            }
+            
+            // Chỉ cho phép số và dấu chấm
+            if ((e.keyCode < 48 || e.keyCode > 57) && 
+                (e.keyCode < 96 || e.keyCode > 105) && 
+                e.keyCode !== 190 && e.keyCode !== 110) {
+                e.preventDefault();
+            }
+            
+            // Chỉ cho phép một dấu chấm
+            if ((e.keyCode === 190 || e.keyCode === 110) && _this.val().includes('.')) {
+                e.preventDefault();
+            }
+        });
+    };
 
 
 	$(document).ready(function(){
