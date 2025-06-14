@@ -22,7 +22,7 @@ class CargoService extends BaseService implements CargoServiceInterface{
 
     protected function prepareModelData(Request $request): self
     {
-        return $this->initializeBasicData($request);
+        return $this->initializeBasicData($request)->convertToDecimal();
     }
 
     private function initializeBasicData(Request $request): self {
@@ -33,6 +33,29 @@ class CargoService extends BaseService implements CargoServiceInterface{
             $this->modelData['close'] = $request->close == 'on' ? 1 : 0;
             $this->modelData['person_close_id'] = Auth::user()->id;
         }
+        return $this;
+    }
+
+   // Trong CargoRepository
+    public function getDecimalFields() {
+        return [
+            'temp_import', 'reexport', 'overdue_not_reexported',
+            'export_turnover', 'import_turnover', 'taxable_export_turnover',
+            'taxable_import_turnover', 'outgoing_transit', 'incoming_transit',
+            'outgoing_transit_turnover', 'incoming_transit_turnover'
+        ];
+    }
+
+    // Trong Service
+    private function convertToDecimal(): self{
+        $decimalFields = $this->getDecimalFields();
+        
+        foreach ($decimalFields as $field) {
+            if (isset($this->modelData[$field]) && !empty($this->modelData[$field])) {
+                $this->modelData[$field] = floatval(str_replace(',', '', $this->modelData[$field]));
+            }
+        }
+        
         return $this;
     }
 
